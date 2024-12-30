@@ -1,0 +1,38 @@
+---
+const { pageTitle } = Astro.props;
+const pages = [
+    {
+        url: '/',
+        title: 'Kezdőlap',
+    },
+    {
+        url: '/rendezvenyek',
+        title: 'Rendezvények',
+    },
+    {
+        url: '/kapcsolat',
+        title: 'Kapcsolat',
+    },
+];
+
+const pathname = new URL(Astro.request.url).pathname;
+---
+
+<header>
+    <div class="bg-primary">
+        <nav class="container text-white mx-auto">
+        {
+            pages.map(({ url, title }) => (
+                <a href={url} class=`inline-block p-4 hover:bg-black/10 ${pathname === url ? "bg-black/10" : ""}`>
+                    {title}
+                </a>
+            ))
+        }
+        </nav>
+    </div>
+
+    <div class="container mx-auto">
+        <h1 class="text-3xl font-bold py-4">{pageTitle}</h1>
+        <slot name="header-content" />
+    </div>
+</header>

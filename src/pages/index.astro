@@ -1,0 +1,16 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import Masthead from '@components/Masthead.astro';
+
+const pageTitle = 'Kis-Galya';
+---
+
+<BaseLayout>
+    <Masthead pageTitle={pageTitle}>
+        <div slot="header-content">
+            <p class="">
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+            </p>
+        </div>
+    </Masthead>
+</BaseLayout>

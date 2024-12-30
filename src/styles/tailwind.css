@@ -1,0 +1,10 @@
+@import 'tailwindcss';
+
+@theme {
+    --font-display: 'Satoshi', 'sans-serif';
+
+    --color-primary: #297567;
+    --color-default: #2d2d2d;
+
+    --spacing-1px: 1px;
+}
