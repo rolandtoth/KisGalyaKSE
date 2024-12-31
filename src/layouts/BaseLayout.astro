@@ -8,14 +8,14 @@ const title = pageTitle ? `${pageTitle} - ${siteName}` : siteName;
 ---
 
 <html lang="hu">
-    <head>
-        <meta charset="utf-8" />
-        <link rel="icon" type="image/x-icon" href="/favicon.ico" />
-        <meta name="viewport" content="width=device-width" />
-        <meta name="generator" content={Astro.generator} />
-        <title>{title}</title>
-    </head>
-    <body class="bg-gray-100 text-default">
-        <slot />
-    </body>
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+  </head>
+  <body class="bg-gray-100 text-default">
+    <slot />
+  </body>
 </html>

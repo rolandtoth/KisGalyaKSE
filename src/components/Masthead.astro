@@ -1,38 +1,59 @@
 ---
+import { siteName, siteSlogan } from 'src/constants';
+
 const { pageTitle } = Astro.props;
 const pages = [
-    {
-        url: '/',
-        title: 'Kezdőlap',
-    },
-    {
-        url: '/rendezvenyek',
-        title: 'Rendezvények',
-    },
-    {
-        url: '/kapcsolat',
-        title: 'Kapcsolat',
-    },
+  {
+    url: '/hirek',
+    title: 'Hírek',
+  },
+  {
+    url: '/rendezvenyek',
+    title: 'Rendezvények',
+  },
+  {
+    url: '/sifutas',
+    title: 'Sífutás',
+  },
+  {
+    url: '/kerekpartura',
+    title: 'Kerékpártúra',
+  },
+  {
+    url: '/kapcsolat',
+    title: 'Kapcsolat',
+  },
 ];
 
 const pathname = new URL(Astro.request.url).pathname;
 ---
 
 <header>
-    <div class="bg-primary">
-        <nav class="container text-white mx-auto">
+  <div class="bg-primary">
+    <div class="container mx-auto flex justify-between select-none">
+      <div>
+        <a href="/" class="flex flex-col text-white py-2">
+          <span class="block text-2xl">{siteName}</span>
+          <span class="block text-sm">{siteSlogan}</span>
+        </a>
+      </div>
+      <nav class="flex">
         {
-            pages.map(({ url, title }) => (
-                <a href={url} class=`inline-block p-4 hover:bg-black/10 ${pathname === url ? "bg-black/10" : ""}`>
-                    {title}
-                </a>
-            ))
+          pages.map(({ url, title }) => (
+            <a
+              href={url}
+              class={`px-4 inline-flex items-center text-white lg:hover:bg-black/10 ${pathname === url ? 'bg-black/10' : ''}`}
+            >
+              {title}
+            </a>
+          ))
         }
-        </nav>
+      </nav>
     </div>
+  </div>
 
-    <div class="container mx-auto">
-        <h1 class="text-3xl font-bold py-4">{pageTitle}</h1>
-        <slot name="header-content" />
-    </div>
+  <div class="container mx-auto">
+    <h1 class="text-3xl font-bold py-4">{pageTitle}</h1>
+    <slot name="header-content" />
+  </div>
 </header>

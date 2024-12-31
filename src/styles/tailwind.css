@@ -1,10 +1,16 @@
 @import 'tailwindcss';
 
 @theme {
-    --font-display: 'Satoshi', 'sans-serif';
+  --font-display: 'Satoshi', 'sans-serif';
 
-    --color-primary: #297567;
-    --color-default: #2d2d2d;
+  --color-primary: #297567;
+  --color-default: #2d2d2d;
 
-    --spacing-1px: 1px;
+  --spacing-1px: 1px;
+}
+
+@layer utilities {
+  .container {
+    max-width: 84rem;
+  }
 }

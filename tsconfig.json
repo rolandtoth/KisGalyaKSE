@@ -4,6 +4,8 @@
   "exclude": ["dist"],
   "compilerOptions": {
     "verbatimModuleSyntax": true,
+    "strictNullChecks": true,
+    "allowJs": true,
     "baseUrl": ".",
     "paths": {
       "@config": ["src/config"],
