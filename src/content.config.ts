@@ -3,7 +3,7 @@ import {glob} from 'astro/loaders';
 
 const INTERNAL_LINK_REGEX = new RegExp(/^\/(?!\/)[^?\n]+(.)*$/);
 const EventCategory = z.enum(["uveghuta-kupa"]);
-const EventMetaKey = z.enum(["Limitált indulási létszám"]);
+const EventMetaKey = z.enum(["Limitált indulási létszám", "Versenykiírás"]);
 
 const events = defineCollection({
   loader: glob({pattern: "**/*.md", base: "./src/data/events"}),
