@@ -36,20 +36,21 @@ const isActive = (url: string) => {
 ---
 
 <header>
-  <div class="bg-secondary">
+  <div class="bg-secondary-600">
     <div class="container mx-auto flex justify-between select-none">
-      <div>
-        <a href="/" class="flex flex-col text-white py-2">
-          <span class="block text-2xl">{siteName}</span>
-          <span class="block text-sm">{siteSlogan}</span>
-        </a>
-      </div>
+      <a href="/" class="flex flex-col text-white py-3" aria-title={siteName}>
+        <span class="font-display block text-3xl leading-none">{siteName}</span>
+        <span
+          class="block text-[0.7rem] relative top-1 font-bold tracking-[0.1rem] uppercase"
+          >{siteSlogan}</span
+        >
+      </a>
       <nav class="flex">
         {
           pages.map(({ url, title }) => (
             <a
               href={url}
-              class={`px-4 inline-flex items-center text-white lg:hover:bg-black/15 ${isActive(url) ? 'bg-black/15 text' : ''}`}
+              class={`px-4 inline-flex items-center lg:min-w-24 justify-around border-y-4 border-transparent ${isActive(url) ? 'border-b-primary-300 text-primary-300' : ' text-white lg:hover:text-primary-300'}`}
             >
               {title}
             </a>

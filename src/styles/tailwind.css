@@ -1,13 +1,48 @@
 @import 'tailwindcss';
 
 @theme {
-  --font-display: 'Satoshi', 'sans-serif';
+  --font-*: initial;
+  --default-font-family: 'Raleway', 'sans-serif';
+  --font-display: 'Sriracha', 'sans-serif';
 
-  --color-primary: #00ac47;
-  --color-secondary: #297567;
   --color-default: #2d2d2d;
 
+  --color-primary-50: #f7fce9;
+  --color-primary-100: #ecf7d0;
+  --color-primary-200: #daefa7;
+  --color-primary-300: #b5de5c;
+  --color-primary-400: #a5d348;
+  --color-primary-500: #87b82a;
+  --color-primary-600: #68931d;
+  --color-primary-700: #4f701b;
+  --color-primary-800: #41591b;
+  --color-primary-900: #374c1b;
+  --color-primary-950: #1c2a09;
+
+  --color-secondary-50: #f3faf8;
+  --color-secondary-100: #d6f1e8;
+  --color-secondary-200: #ade2d3;
+  --color-secondary-300: #7cccb8;
+  --color-secondary-400: #51b09b;
+  --color-secondary-500: #379582;
+  --color-secondary-600: #297567;
+  --color-secondary-700: #256055;
+  --color-secondary-800: #214e47;
+  --color-secondary-900: #20413c;
+  --color-secondary-950: #0d2623;
+
   --spacing-1px: 1px;
+  --spacing-2px: 2px;
+  --spacing-3px: 3px;
+  --spacing-4px: 4px;
+  --spacing-5px: 5px;
+  --spacing-6px: 6px;
+  --spacing-7px: 7px;
+  --spacing-8px: 8px;
+  --spacing-9px: 9px;
+  --spacing-10px: 10px;
+  --spacing-11px: 11px;
+  --spacing-12px: 12px;
 }
 
 @layer utilities {
@@ -19,6 +54,30 @@
       padding-inline: calc(var(--spacing) * 16);
     }
   }
+}
+
+@font-face {
+  font-family: 'Sriracha';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('/assets/fonts/sriracha/sriracha-regular.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Raleway';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('/assets/fonts/raleway/raleway-400.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Raleway';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('/assets/fonts/raleway/raleway-600.woff2') format('woff2');
 }
 
 :root {
