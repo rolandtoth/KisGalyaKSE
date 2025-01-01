@@ -3,7 +3,8 @@
 @theme {
   --font-display: 'Satoshi', 'sans-serif';
 
-  --color-primary: #297567;
+  --color-primary: #00ac47;
+  --color-secondary: #297567;
   --color-default: #2d2d2d;
 
   --spacing-1px: 1px;
@@ -18,4 +19,9 @@
       padding-inline: calc(var(--spacing) * 16);
     }
   }
+}
+
+:root {
+  overflow-y: scroll;
+  scrollbar-width: thin;
 }

@@ -1,14 +1,16 @@
 ---
 import BaseLayout from '@layouts/BaseLayout.astro';
-import Masthead from '@components/Masthead.astro';
+import Header from '@components/Header.astro';
 
 const pageTitle = '404';
 ---
 
 <BaseLayout pageTitle={pageTitle}>
-  <Masthead pageTitle={pageTitle}>
+  <Header>
     <div slot="header-content">
-      <p>Az oldal nem található.</p>
+      <div class="container mx-auto">
+        <h1 class="text-3xl font-bold py-4">Az oldal nem található.</h1>
+      </div>
     </div>
-  </Masthead>
+  </Header>
 </BaseLayout>

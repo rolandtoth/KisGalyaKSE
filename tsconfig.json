@@ -6,6 +6,7 @@
     "verbatimModuleSyntax": true,
     "strictNullChecks": true,
     "allowJs": true,
+    "strict": true,
     "baseUrl": ".",
     "paths": {
       "@config": ["src/config"],

@@ -1,19 +1,20 @@
 ---
 import BaseLayout from '@layouts/BaseLayout.astro';
-import Masthead from '@components/Masthead.astro';
+import Header from '@components/Header.astro';
+import { getCollection } from 'astro:content';
 
 const pageTitle = 'Rendezvények';
-
-import { getCollection } from 'astro:content';
 const events = await getCollection('events');
 ---
 
 <BaseLayout pageTitle={pageTitle}>
-  <Masthead pageTitle={pageTitle}>
+  <Header>
     <div slot="header-content">
-      <p>Rendezvények goes here</p>
+      <div class="container mx-auto">
+        <h1 class="text-3xl font-bold py-4">Rendezvények header goes here</h1>
+      </div>
     </div>
-  </Masthead>
+  </Header>
 
   <div class="container mx-auto">
     <ul>

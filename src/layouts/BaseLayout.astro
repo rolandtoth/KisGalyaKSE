@@ -2,6 +2,7 @@
 import { ClientRouter } from 'astro:transitions';
 import '@styles/tailwind.css';
 import { siteName } from 'src/constants';
+import Footer from '@components/Footer.astro';
 
 const { pageTitle } = Astro.props;
 
@@ -17,7 +18,10 @@ const title = pageTitle ? `${pageTitle} - ${siteName}` : siteName;
     <meta name="viewport" content="width=device-width" />
     <meta name="generator" content={Astro.generator} />
   </head>
-  <body class="bg-gray-100 text-default">
-    <slot />
+  <body class="text-default flex flex-col min-h-screen">
+    <main class="flex-grow">
+      <slot />
+    </main>
+    <Footer />
   </body>
 </html>

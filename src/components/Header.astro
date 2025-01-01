@@ -1,7 +1,6 @@
 ---
 import { siteName, siteSlogan } from 'src/constants';
 
-const { pageTitle } = Astro.props;
 const pages = [
   {
     url: '/',
@@ -26,10 +25,18 @@ const pages = [
 ];
 
 const pathname = new URL(Astro.request.url).pathname;
+
+const isActive = (url: string) => {
+  if (url === '/' && pathname === '/') {
+    return true;
+  }
+
+  return url !== '/' ? pathname.startsWith(url) : false;
+};
 ---
 
 <header>
-  <div class="bg-primary">
+  <div class="bg-secondary">
     <div class="container mx-auto flex justify-between select-none">
       <div>
         <a href="/" class="flex flex-col text-white py-2">
@@ -42,7 +49,7 @@ const pathname = new URL(Astro.request.url).pathname;
           pages.map(({ url, title }) => (
             <a
               href={url}
-              class={`px-4 inline-flex items-center text-white lg:hover:bg-black/10 ${pathname === url ? 'bg-black/10' : ''}`}
+              class={`px-4 inline-flex items-center text-white lg:hover:bg-black/15 ${isActive(url) ? 'bg-black/15 text' : ''}`}
             >
               {title}
             </a>
@@ -52,8 +59,5 @@ const pathname = new URL(Astro.request.url).pathname;
     </div>
   </div>
 
-  <div class="container mx-auto">
-    <h1 class="text-3xl font-bold py-4">{pageTitle}</h1>
-    <slot name="header-content" />
-  </div>
+  <slot name="header-content" />
 </header>
