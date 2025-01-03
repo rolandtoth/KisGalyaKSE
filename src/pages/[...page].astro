@@ -7,6 +7,7 @@ import arrowLeft from '@assets/icons/arrow-left.svg?raw';
 import chevronLeft from '@assets/icons/chevron-left.svg?raw';
 import chevronRight from '@assets/icons/chevron-right.svg?raw';
 import arrowRight from '@assets/icons/arrow-right.svg?raw';
+import HeaderContent from '@components/HeaderContent.astro';
 
 const pageTitle = '';
 
@@ -37,14 +38,13 @@ const { first, prev, next, last } = page.url;
 
 <BaseLayout pageTitle={pageTitle}>
   <Header>
-    <div slot="header-content" class="py-40 bg-secondary-800 text-white mb-8">
-      <div class="container mx-auto">
-        <h1 class="text-4xl py-4">Kis-Galya Árvíztűrő Tükörfúrógép</h1>
-      </div>
-    </div>
+    <HeaderContent
+      slot="header-content"
+      title="Kis-Galya Árvíztűrő Tükörfúrógép"
+    />
   </Header>
 
-  <div class="container mx-auto">
+  <div class="container mx-auto mt-8">
     <ul>
       {
         news.map((item: any) => (

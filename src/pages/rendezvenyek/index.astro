@@ -2,6 +2,7 @@
 import BaseLayout from '@layouts/BaseLayout.astro';
 import Header from '@components/Header.astro';
 import { getCollection } from 'astro:content';
+import HeaderContent from '@components/HeaderContent.astro';
 
 const pageTitle = 'Rendezvények';
 const events = await getCollection('events');
@@ -9,19 +10,15 @@ const events = await getCollection('events');
 
 <BaseLayout pageTitle={pageTitle}>
   <Header>
-    <div slot="header-content">
-      <div class="container mx-auto">
-        <h1 class="text-3xl font-bold py-4">Rendezvények header goes here</h1>
-      </div>
-    </div>
+    <HeaderContent slot="header-content" title={pageTitle} />
   </Header>
 
-  <div class="container mx-auto">
+  <div class="container mx-auto mt-8">
     <ul>
       {
         events.map((event: any) => (
           <li>
-            <a href={`/rendezvenyek/${event.data.slug}`} class="underline">
+            <a href={`/rendezvenyek/${event.id}`} class="underline">
               {event.data.title}
             </a>
           </li>

@@ -2,6 +2,7 @@
 import BaseLayout from '@layouts/BaseLayout.astro';
 import Header from '@components/Header.astro';
 import { getCollection, getEntry, render } from 'astro:content';
+import HeaderContent from '@components/HeaderContent.astro';
 
 const { event: eventId } = Astro.params;
 
@@ -30,14 +31,10 @@ const competitionAnnouncement = entry.data.eventMeta?.find(
 
 <BaseLayout pageTitle={pageTitle}>
   <Header>
-    <div slot="header-content">
-      <div class="container mx-auto">
-        <h1 class="text-3xl font-bold py-4">{entry.data.excerpt}</h1>
-      </div>
-    </div>
+    <HeaderContent slot="header-content" title={entry.data.title} />
   </Header>
 
-  <div class="container mx-auto">
+  <div class="container mx-auto mt-8">
     <Content />
 
     {

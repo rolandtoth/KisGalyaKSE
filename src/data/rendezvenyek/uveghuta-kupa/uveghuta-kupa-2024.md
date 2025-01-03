@@ -2,6 +2,7 @@
 type: uveghuta-kupa
 title: XXI. Üveghuta Kupa
 slug: uveghuta-kupa-2024
+featuredImage: uveghuta-kupa.webp
 excerpt: XXI. Üveghuta Kupa excerpt goes here
 year: 2024
 pubDate: 2024-10-06

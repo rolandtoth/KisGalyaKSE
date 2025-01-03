@@ -2,6 +2,7 @@
 type: uveghuta-kupa
 title: XIX. Üveghuta Kupa
 slug: uveghuta-kupa-2022
+featuredImage: uveghuta-kupa.webp
 excerpt: XIX. Üveghuta Kupa excerpt goes here
 year: 2022
 pubDate: 2022-10-06

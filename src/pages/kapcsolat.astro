@@ -1,16 +1,91 @@
 ---
 import BaseLayout from '@layouts/BaseLayout.astro';
 import Header from '@components/Header.astro';
+import { siteNameFull } from 'src/constants';
+import HeaderContent from '@components/HeaderContent.astro';
+import documentText from '@assets/icons/document-text.svg?raw';
 
 const pageTitle = 'Kapcsolat';
 ---
 
 <BaseLayout pageTitle={pageTitle}>
   <Header>
-    <div slot="header-content">
-      <div class="container mx-auto">
-        <h1 class="text-3xl font-bold py-4">Kapcsolat</h1>
+    <HeaderContent slot="header-content" title={siteNameFull} />
+  </Header>
+
+  <div
+    class="container mx-auto prose prose-headings:text-lg prose-headings:text-secondary-700"
+  >
+    <div class="lg:flex lg:gap-8">
+      <div class="md:basis-1/2 lg:basis-2/3">
+        <h3>Székhely</h3>
+
+        <p>Kis-Galya KSE, 3531 Miskolc, Győri kapu 37 2/3</p>
+
+        <h3>Levelezési cím</h3>
+
+        <p>Kirilla László, 3557 Bükkszentkereszt, Szabadság Telep 3.</p>
+
+        <h3>Kirilla László</h3>
+
+        <p>
+          <a href="tel:06309284233" class="lg:no-underline"
+            >Tel: 06 (30) 928-4233</a
+          >
+        </p>
+
+        <h3>Sikter Zsuzsa</h3>
+
+        <p>
+          <a href="tel:06302063602" class="lg:no-underline"
+            >Tel: 06 (30) 206-3602</a
+          >
+        </p>
+
+        <h3>E-mail</h3>
+
+        <ul class="list-none pl-0 [&>li]:pl-0">
+          <li>
+            <a href="mailto:mvsc_kukac_vipmail_pont_hu"
+              >mvsc kukac vipmail pont hu</a
+            >
+          </li>
+          <li>
+            <a href="mailto:kisgalya_kukac_gmail_pont_hu"
+              >kisgalya kukac gmail pont hu</a
+            >
+          </li>
+          <li>
+            <a href="mailto:info_kukac_kisgalya_pont_hu"
+              >info kukac kisgalya pont hu (nem használjuk)</a
+            >
+          </li>
+        </ul>
+      </div>
+
+      <div>
+        <h3>Adó 1%</h3>
+
+        <p>Adószám: 18441732105</p>
+
+        <img
+          src="/images/kisgalya-kse-egy-szazalek.jpg"
+          alt="Kis-Galya KSE 1 százalék"
+          class="not-prose block"
+        />
+
+        <p>
+          Közlemény az adózó rendelkezése szerint a kedvezményezett részére
+          átutalt összeg felhasználásáról:
+        </p>
+
+        <p class="-mt-2">
+          <a href="/docs/19KOZ.pdf" target="_blank" class="button">
+            <Fragment set:html={documentText} />
+            <span class="relative top-1px">PDF megtekintése</span>
+          </a>
+        </p>
       </div>
     </div>
-  </Header>
+  </div>
 </BaseLayout>

@@ -1,12 +1,12 @@
 ---
 import { ClientRouter } from 'astro:transitions';
 import '@styles/tailwind.css';
-import { siteName } from 'src/constants';
+import { siteName, siteNameFull } from 'src/constants';
 import Footer from '@components/Footer.astro';
 
 const { pageTitle } = Astro.props;
 
-const title = pageTitle ? `${pageTitle} - ${siteName}` : siteName;
+const title = pageTitle ? `${pageTitle} - ${siteName}` : siteNameFull;
 ---
 
 <html lang="hu">
