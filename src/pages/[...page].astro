@@ -1,0 +1,70 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import Header from '@components/Header.astro';
+import { getCollection } from 'astro:content';
+import type { GetStaticPathsOptions } from 'astro';
+import arrowLeft from '@assets/icons/arrow-left.svg?raw';
+import chevronLeft from '@assets/icons/chevron-left.svg?raw';
+import chevronRight from '@assets/icons/chevron-right.svg?raw';
+import arrowRight from '@assets/icons/arrow-right.svg?raw';
+
+const pageTitle = '';
+
+export async function getStaticPaths(options: GetStaticPathsOptions) {
+  const news = await getCollection('news', ({ data }) => {
+    return data.draft !== true;
+  });
+
+  news.sort((a, b) => (b.data.pubDate > a.data.pubDate ? 1 : -1));
+
+  return options.paginate(news, { pageSize: 1 });
+}
+
+const getUrl = (item: any) => {
+  let segments = item.filePath
+    .replace('src/data/', '')
+    .replace('.md', '')
+    .split('/');
+
+  return [segments[0], segments[2]].join('/');
+};
+
+const { page } = Astro.props;
+
+const news = page.data;
+const { first, prev, next, last } = page.url;
+---
+
+<BaseLayout pageTitle={pageTitle}>
+  <Header>
+    <div slot="header-content" class="py-40 bg-secondary-800 text-white mb-8">
+      <div class="container mx-auto">
+        <h1 class="text-4xl py-4">Kis-Galya Árvíztűrő Tükörfúrógép</h1>
+      </div>
+    </div>
+  </Header>
+
+  <div class="container mx-auto">
+    <ul>
+      {
+        news.map((item: any) => (
+          <li>
+            <a href={getUrl(item)} class="underline">
+              {item.data.title}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+
+    <nav
+      class="my-8 flex gap-1 text-xl [&>*]:inline-block [&>*]:p-2 [&>*]:leading-tight [&>a:not[href]>svg]:fill-gray-100"
+    >
+      <a href={first}><Fragment set:html={arrowLeft} /></a>
+      <a href={prev}><Fragment set:html={chevronLeft} /></a>
+      <span class="text-[1rem]">{page.currentPage}/{page.lastPage}</span>
+      <a href={next}><Fragment set:html={chevronRight} /></a>
+      <a href={last}><Fragment set:html={arrowRight} /></a>
+    </nav>
+  </div>
+</BaseLayout>
