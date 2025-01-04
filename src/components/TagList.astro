@@ -1,0 +1,15 @@
+---
+const { tags } = Astro.props;
+---
+
+{
+  tags?.length && (
+    <div class="flex gap-2">
+      {tags.map((tag: string) => (
+        <span class="inline-block p-2 py-10px leading-1 text-xs font-bold text-secondary-700 bg-white rounded-lg uppercase rounded-tl-xs tracking-widest shadow-xs">
+          {tag}
+        </span>
+      ))}
+    </div>
+  )
+}

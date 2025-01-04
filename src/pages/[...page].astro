@@ -14,13 +14,13 @@ const pageTitle = '';
 const heading = '';
 
 export async function getStaticPaths(options: GetStaticPathsOptions) {
-  const news = await getCollection('news', ({ data }) => {
+  const entries = await getCollection('news', ({ data }) => {
     return data.draft !== true;
   });
 
-  news.sort((a, b) => (b.data.pubDate > a.data.pubDate ? 1 : -1));
+  entries.sort((a, b) => (b.data.pubDate > a.data.pubDate ? 1 : -1));
 
-  return options.paginate(news, { pageSize: 1 });
+  return options.paginate(entries, { pageSize: 1 });
 }
 
 const getUrl = (item: any) => {

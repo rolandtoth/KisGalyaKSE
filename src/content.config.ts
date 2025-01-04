@@ -32,4 +32,16 @@ const events = defineCollection({
   }),
 });
 
-export const collections = { events, news };
+const biketrips = defineCollection({
+  loader: glob({ pattern: "**/*.md", base: "./src/data/kerekparturak" }),
+  schema: z.object({
+    title: z.string(),
+    excerpt: z.string(),
+    tags: z.string().array(),
+    pubDate: z.date(),
+    sortOrder: z.number(),
+    draft: z.boolean().optional(),
+  }),
+});
+
+export const collections = { biketrips, events, news };

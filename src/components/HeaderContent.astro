@@ -1,9 +1,21 @@
 ---
-const { heading } = Astro.props;
+const { heading, breadcrumbs } = Astro.props;
 ---
 
-<div class="py-12 lg:py-16 bg-secondary-800 text-white">
-  <div class="container mx-auto">
-    <h1 class="text-2xl lg:text-3xl">{heading}</h1>
+<div class="py-8 lg:py-12 bg-secondary-800 text-white">
+  <div class="container mx-auto flex flex-col gap-2">
+    {
+      breadcrumbs?.length > 0 && (
+        <nav class="flex gap-2">
+          {breadcrumbs.map(({ url, title }) => (
+            <a href={url} class="text-white hover:text-primary-400">
+              {title}
+            </a>
+          ))}
+        </nav>
+      )
+    }
+    <h1 class="text-2xl lg:text-3xl"><Fragment set:html={heading} /></h1>
+    <slot name="header-content-subtitle" />
   </div>
 </div>

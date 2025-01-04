@@ -4,8 +4,8 @@
 
 @theme {
   --font-*: initial;
+  --font-display: 'Sriracha', 'cursive';
   --default-font-family: 'Onest', 'sans-serif';
-  --font-display: 'Shantell Sans', 'sans-serif';
 
   --color-default: #2d2d2d;
 
@@ -64,7 +64,7 @@
 }
 
 .button {
-  @apply !no-underline items-center px-4 py-2 mt-1 bg-primary-300 rounded-sm inline-flex gap-2 lg:hover:bg-primary-300 lg:hover:text-default transition-colors;
+  @apply !no-underline items-center px-4 py-2 mt-1 bg-primary-300 rounded-sm inline-flex gap-2 lg:hover:bg-primary-400 lg:hover:text-default transition-colors;
 }
 
 .prose-default {

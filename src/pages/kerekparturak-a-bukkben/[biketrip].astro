@@ -1,0 +1,60 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import Header from '@components/Header.astro';
+import HeaderContent from '@components/HeaderContent.astro';
+import MainContent from '@components/MainContent.astro';
+import { getCollection, getEntry, render } from 'astro:content';
+import BikeTrips from '@components/BikeTrips.astro';
+import TagList from '@components/TagList.astro';
+
+const { biketrip: entryId } = Astro.params;
+
+export async function getStaticPaths() {
+  const entries = await getCollection('biketrips', ({ data }) => {
+    return data.draft !== true;
+  });
+
+  entries.sort((a, b) => (b.data.sortOrder > a.data.sortOrder ? -1 : 1));
+
+  return entries.map((entry) => ({
+    params: { biketrip: entry.id },
+    props: { biketrip: entry },
+  }));
+}
+
+const entry = await getEntry('biketrips', entryId);
+
+if (!entry) {
+  return Astro.redirect('/404');
+}
+
+const pageTitle = entry.data.title;
+const heading = pageTitle;
+const breadcrumbs = [
+  {
+    url: '/kerekparturak-a-bukkben',
+    title: 'Kerékpártúrák a Bükkben',
+  },
+];
+
+const { Content } = await render(entry);
+---
+
+<BaseLayout pageTitle={pageTitle}>
+  <Header>
+    <HeaderContent slot="header-content" {...{ heading, breadcrumbs }}>
+      <p slot="header-content-subtitle">
+        <TagList tags={entry.data.tags} />
+      </p>
+    </HeaderContent>
+  </Header>
+
+  <MainContent>
+    <div class="lg:flex lg:gap-12">
+      <div class="prose-default !max-w-none">
+        <Content />
+      </div>
+      <BikeTrips />
+    </div>
+  </MainContent>
+</BaseLayout>
