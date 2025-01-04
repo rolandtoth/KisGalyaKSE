@@ -4,8 +4,8 @@
 
 @theme {
   --font-*: initial;
-  --default-font-family: 'Raleway', 'sans-serif';
-  --font-display: 'Sriracha', 'sans-serif';
+  --default-font-family: 'Onest', 'sans-serif';
+  --font-display: 'Shantell Sans', 'sans-serif';
 
   --color-default: #2d2d2d;
 
@@ -58,35 +58,25 @@
   }
 }
 
-@font-face {
-  font-family: 'Sriracha';
-  font-style: normal;
-  font-weight: 400;
-  font-display: swap;
-  src: url('/assets/fonts/sriracha/sriracha-regular.woff2') format('woff2');
-}
-
-@font-face {
-  font-family: 'Raleway';
-  font-style: normal;
-  font-weight: 400;
-  font-display: swap;
-  src: url('/assets/fonts/raleway/raleway-400.woff2') format('woff2');
-}
-
-@font-face {
-  font-family: 'Raleway';
-  font-style: normal;
-  font-weight: 700;
-  font-display: swap;
-  src: url('/assets/fonts/raleway/raleway-600.woff2') format('woff2');
-}
-
 :root {
   overflow-y: scroll;
   scrollbar-width: thin;
 }
 
 .button {
-  @apply no-underline items-center px-4 py-2 mt-1 bg-primary-300 rounded-sm inline-flex gap-2 lg:hover:bg-primary-300 transition-colors;
+  @apply !no-underline items-center px-4 py-2 mt-1 bg-primary-300 rounded-sm inline-flex gap-2 lg:hover:bg-primary-300 lg:hover:text-default transition-colors;
+}
+
+.prose-default {
+  @apply prose prose-headings:text-lg prose-headings:text-secondary-700 !max-w-none;
+}
+
+a {
+  &:hover {
+    @apply text-primary-500;
+  }
+
+  &:not([href]) {
+    @apply pointer-events-none;
+  }
 }

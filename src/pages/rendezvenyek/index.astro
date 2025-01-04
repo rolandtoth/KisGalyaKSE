@@ -3,6 +3,7 @@ import BaseLayout from '@layouts/BaseLayout.astro';
 import Header from '@components/Header.astro';
 import { getCollection } from 'astro:content';
 import HeaderContent from '@components/HeaderContent.astro';
+import MainContent from '@components/MainContent.astro';
 
 const pageTitle = 'Rendezvények';
 const events = await getCollection('events');
@@ -10,10 +11,10 @@ const events = await getCollection('events');
 
 <BaseLayout pageTitle={pageTitle}>
   <Header>
-    <HeaderContent slot="header-content" title={pageTitle} />
+    <HeaderContent slot="header-content" heading={pageTitle} />
   </Header>
 
-  <div class="container mx-auto mt-8">
+  <MainContent>
     <ul>
       {
         events.map((event: any) => (
@@ -25,5 +26,5 @@ const events = await getCollection('events');
         ))
       }
     </ul>
-  </div>
+  </MainContent>
 </BaseLayout>

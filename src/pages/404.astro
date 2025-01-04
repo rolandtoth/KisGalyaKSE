@@ -1,16 +1,19 @@
 ---
 import BaseLayout from '@layouts/BaseLayout.astro';
 import Header from '@components/Header.astro';
+import MainContent from '@components/MainContent.astro';
+import HeaderContent from '@components/HeaderContent.astro';
 
 const pageTitle = '404';
+const heading = 'Az oldal nem található.';
 ---
 
 <BaseLayout pageTitle={pageTitle}>
   <Header>
-    <div slot="header-content">
-      <div class="container mx-auto">
-        <h1 class="text-3xl font-bold py-4">Az oldal nem található.</h1>
-      </div>
-    </div>
+    <HeaderContent slot="header-content" heading={heading} />
   </Header>
 </BaseLayout>
+
+<MainContent class="prose-default">
+  <p>A keresett oldal nem található.</p>
+</MainContent>

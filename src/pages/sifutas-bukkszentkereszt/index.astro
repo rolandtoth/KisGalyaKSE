@@ -1,0 +1,74 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import Header from '@components/Header.astro';
+import HeaderContent from '@components/HeaderContent.astro';
+import MainContent from '@components/MainContent.astro';
+
+const pageTitle = 'Sífutás';
+const heading = 'Sífutás Bükkszentkereszten';
+---
+
+<BaseLayout pageTitle={pageTitle}>
+  <Header>
+    <HeaderContent slot="header-content" heading={heading} />
+  </Header>
+
+  <MainContent>
+    <div class="prose-default">
+      <p>
+        <img
+          class="alignnone size-full wp-image-1993"
+          title=""
+          src="http://kisgalya.hu/wp-content/uploads/2013/02/sifutas.jpg"
+          alt=""
+          width="550"
+          height="358"
+          srcset="https://kisgalya.hu/wp-content/uploads/2013/02/sifutas.jpg 550w, https://kisgalya.hu/wp-content/uploads/2013/02/sifutas-360x234.jpg 360w, https://kisgalya.hu/wp-content/uploads/2013/02/sifutas-540x351.jpg 540w, https://kisgalya.hu/wp-content/uploads/2013/02/sifutas-120x78.jpg 120w, https://kisgalya.hu/wp-content/uploads/2013/02/sifutas-150x97.jpg 150w"
+          sizes="(max-width: 550px) 100vw, 550px"
+        />
+      </p>
+      <p>
+        Egyesületünk a téli szezonokban sífutási lehetőséget biztosít az
+        érdeklődő fiatalok, iskolai csoportok részére Bükkszentkereszten.
+      </p>
+      <p>Oktatást és felszerelést igény szerint biztosítunk.</p>
+      <p>
+        A programról egyeztetni Sikter Zsuzsánál lehet, a <strong
+          >30 206-3602</strong
+        >-es telefonszámon.
+      </p>
+      <h2 style="text-align: center;">Töltse le prospektusainkat!</h2>
+      <div style="text-align: center; margin-bottom: 20px;">
+        <a
+          href="/wp-content/themes/kisgalya/docs/kisgalya-sifutas-prospektus.pdf"
+        >
+          &nbsp;
+        </a><a
+          href="/wp-content/themes/kisgalya/docs/kisgalya-sifutas-prospektus.pdf"
+          target="_blank"
+          ><img
+            class="aligncenter wp-image-2048 size-full"
+            src="http://kisgalya.hu/wp-content/uploads/2013/01/kisgalya-sifutas-prospektus-2013.jpg"
+            alt="Sífutás prospektus"
+            width="185"
+            height="200"
+            srcset="https://kisgalya.hu/wp-content/uploads/2013/01/kisgalya-sifutas-prospektus-2013.jpg 185w, https://kisgalya.hu/wp-content/uploads/2013/01/kisgalya-sifutas-prospektus-2013-120x129.jpg 120w, https://kisgalya.hu/wp-content/uploads/2013/01/kisgalya-sifutas-prospektus-2013-150x162.jpg 150w"
+            sizes="(max-width: 185px) 100vw, 185px"
+          /><br />
+        </a><a
+          href="/wp-content/uploads/2015/03/a-sifutasrol-2015-03-26.pdf"
+          target="_blank"
+          ><img
+            class="aligncenter wp-image-2408 size-full"
+            src="http://kisgalya.hu/wp-content/uploads/2015/03/a-sifutasrol-2015-03-26.jpg"
+            alt=""
+            width="281"
+            height="197"
+            srcset="https://kisgalya.hu/wp-content/uploads/2015/03/a-sifutasrol-2015-03-26.jpg 281w, https://kisgalya.hu/wp-content/uploads/2015/03/a-sifutasrol-2015-03-26-120x84.jpg 120w, https://kisgalya.hu/wp-content/uploads/2015/03/a-sifutasrol-2015-03-26-150x105.jpg 150w"
+            sizes="(max-width: 281px) 100vw, 281px"
+          /></a
+        >
+      </div>
+    </div>
+  </MainContent>
+</BaseLayout>

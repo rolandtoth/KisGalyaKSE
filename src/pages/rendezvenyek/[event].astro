@@ -3,6 +3,7 @@ import BaseLayout from '@layouts/BaseLayout.astro';
 import Header from '@components/Header.astro';
 import { getCollection, getEntry, render } from 'astro:content';
 import HeaderContent from '@components/HeaderContent.astro';
+import MainContent from '@components/MainContent.astro';
 
 const { event: eventId } = Astro.params;
 
@@ -31,10 +32,10 @@ const competitionAnnouncement = entry.data.eventMeta?.find(
 
 <BaseLayout pageTitle={pageTitle}>
   <Header>
-    <HeaderContent slot="header-content" title={entry.data.title} />
+    <HeaderContent slot="header-content" heading={entry.data.title} />
   </Header>
 
-  <div class="container mx-auto mt-8">
+  <MainContent>
     <Content />
 
     {
@@ -81,5 +82,5 @@ const competitionAnnouncement = entry.data.eventMeta?.find(
         </div>
       )
     }
-  </div>
+  </MainContent>
 </BaseLayout>

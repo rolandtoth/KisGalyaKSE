@@ -4,20 +4,19 @@ import Header from '@components/Header.astro';
 import { siteNameFull } from 'src/constants';
 import HeaderContent from '@components/HeaderContent.astro';
 import documentText from '@assets/icons/document-text.svg?raw';
+import MainContent from '@components/MainContent.astro';
 
 const pageTitle = 'Kapcsolat';
 ---
 
 <BaseLayout pageTitle={pageTitle}>
   <Header>
-    <HeaderContent slot="header-content" title={siteNameFull} />
+    <HeaderContent slot="header-content" heading={siteNameFull} />
   </Header>
 
-  <div
-    class="container mx-auto prose prose-headings:text-lg prose-headings:text-secondary-700"
-  >
+  <MainContent>
     <div class="lg:flex lg:gap-8">
-      <div class="md:basis-1/2 lg:basis-2/3">
+      <div class="md:basis-1/2 lg:basis-2/3 prose-default">
         <h3>Székhely</h3>
 
         <p>Kis-Galya KSE, 3531 Miskolc, Győri kapu 37 2/3</p>
@@ -44,7 +43,7 @@ const pageTitle = 'Kapcsolat';
 
         <h3>E-mail</h3>
 
-        <ul class="list-none pl-0 [&>li]:pl-0">
+        <ul class="!list-none !pl-0 [&>li]:!pl-0">
           <li>
             <a href="mailto:mvsc_kukac_vipmail_pont_hu"
               >mvsc kukac vipmail pont hu</a
@@ -63,7 +62,7 @@ const pageTitle = 'Kapcsolat';
         </ul>
       </div>
 
-      <div>
+      <div class="prose-default">
         <h3>Adó 1%</h3>
 
         <p>Adószám: 18441732105</p>
@@ -87,5 +86,5 @@ const pageTitle = 'Kapcsolat';
         </p>
       </div>
     </div>
-  </div>
+  </MainContent>
 </BaseLayout>

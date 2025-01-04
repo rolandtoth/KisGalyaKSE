@@ -1,5 +1,6 @@
 ---
-import { siteName, siteSlogan } from 'src/constants';
+import { facebookUrl, siteName, siteSlogan } from 'src/constants';
+import facebook from '@assets/icons/facebook.svg?raw';
 
 const pages = [
   {
@@ -11,11 +12,11 @@ const pages = [
     title: 'Rendezvények',
   },
   {
-    url: '/sifutas',
+    url: '/sifutas-bukkszentkereszt',
     title: 'Sífutás',
   },
   {
-    url: '/kerekpartura',
+    url: '/kerekparturak-a-bukkben',
     title: 'Kerékpártúra',
   },
   {
@@ -37,26 +38,34 @@ const isActive = (url: string) => {
 
 <header>
   <div class="bg-secondary-600">
-    <div class="container mx-auto flex justify-between select-none">
-      <a href="/" class="flex flex-col text-white py-3" aria-title={siteName}>
-        <span class="font-display block text-3xl leading-none uppercase"
+    <div class="container mx-auto flex justify-between">
+      <a href="/" class="flex flex-col !text-white py-3" aria-title={siteName}>
+        <span class="font-display block text-[28px] leading-none select-none"
           >{siteName}</span
         >
-        <span class="block text-[0.88rem] relative top-3px tracking-[0.12rem]"
+        <span class="block text-[0.82rem] relative top-6px tracking-[0.1rem]"
           >{siteSlogan}</span
         >
       </a>
-      <nav class="flex">
+      <nav class="flex gap-1">
         {
           pages.map(({ url, title }) => (
             <a
               href={url}
-              class={`px-4 inline-flex items-center lg:min-w-24 justify-around border-y-4 border-transparent ${isActive(url) ? 'border-b-primary-300 text-primary-300' : ' text-white lg:hover:text-primary-300'}`}
+              class={`px-4 inline-flex items-center lg:min-w-24 justify-around border-y-4 border-transparent ${isActive(url) ? 'border-b-primary-300 !text-primary-300' : ' text-white lg:hover:!text-primary-300'}`}
             >
               {title}
             </a>
           ))
         }
+
+        <a
+          href={facebookUrl}
+          class="inline-flex items-center [&>svg]:size-9 [&>svg]:fill-white [&>svg]:lg:hover:fill-primary-300 m-4"
+          target="_blank"
+        >
+          <Fragment set:html={facebook} />
+        </a>
       </nav>
     </div>
   </div>

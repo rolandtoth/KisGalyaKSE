@@ -1,15 +1,17 @@
 ---
-import BaseLayout from '@layouts/BaseLayout.astro';
 import Header from '@components/Header.astro';
 import { getCollection } from 'astro:content';
 import type { GetStaticPathsOptions } from 'astro';
+import BaseLayout from '@layouts/BaseLayout.astro';
+import HeaderContent from '@components/HeaderContent.astro';
+import MainContent from '@components/MainContent.astro';
 import arrowLeft from '@assets/icons/arrow-left.svg?raw';
 import chevronLeft from '@assets/icons/chevron-left.svg?raw';
 import chevronRight from '@assets/icons/chevron-right.svg?raw';
 import arrowRight from '@assets/icons/arrow-right.svg?raw';
-import HeaderContent from '@components/HeaderContent.astro';
 
 const pageTitle = '';
+const heading = '';
 
 export async function getStaticPaths(options: GetStaticPathsOptions) {
   const news = await getCollection('news', ({ data }) => {
@@ -31,20 +33,16 @@ const getUrl = (item: any) => {
 };
 
 const { page } = Astro.props;
-
 const news = page.data;
 const { first, prev, next, last } = page.url;
 ---
 
 <BaseLayout pageTitle={pageTitle}>
   <Header>
-    <HeaderContent
-      slot="header-content"
-      title="Kis-Galya Árvíztűrő Tükörfúrógép"
-    />
+    <HeaderContent slot="header-content" heading={heading} />
   </Header>
 
-  <div class="container mx-auto mt-8">
+  <MainContent>
     <ul>
       {
         news.map((item: any) => (
@@ -66,5 +64,5 @@ const { first, prev, next, last } = page.url;
       <a href={next}><Fragment set:html={chevronRight} /></a>
       <a href={last}><Fragment set:html={arrowRight} /></a>
     </nav>
-  </div>
+  </MainContent>
 </BaseLayout>
