@@ -4,6 +4,9 @@ import Header from '@components/Header.astro';
 import { getCollection } from 'astro:content';
 import HeaderContent from '@components/HeaderContent.astro';
 import MainContent from '@components/MainContent.astro';
+import ListItem from '@components/ListItem.astro';
+import ContentLayout from '@components/ContentLayout.astro';
+import Sponsors from '@components/Sponsors.astro';
 
 const pageTitle = 'Rendezvények';
 const events = await getCollection('events');
@@ -15,16 +18,14 @@ const events = await getCollection('events');
   </Header>
 
   <MainContent>
-    <ul>
-      {
-        events.map((event: any) => (
-          <li>
-            <a href={`/rendezvenyek/${event.id}`} class="underline">
-              {event.data.title}
-            </a>
-          </li>
-        ))
-      }
-    </ul>
+    <ContentLayout>
+      <div slot="main">
+        {events.map((item) => <ListItem item={item} />)}
+      </div>
+
+      <div slot="sidebar">
+        <Sponsors />
+      </div>
+    </ContentLayout>
   </MainContent>
 </BaseLayout>

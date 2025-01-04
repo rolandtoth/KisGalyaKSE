@@ -1,0 +1,42 @@
+---
+const { item } = Astro.props;
+
+const getUrl = (item: any) => {
+  let segments = item.filePath
+    .replace('src/data/', '')
+    .replace('.md', '')
+    .split('/');
+
+  return [segments[0], segments[segments.length - 1]].join('/');
+};
+---
+
+<div
+  class="bg-white flex flex-col gap-4 justify-start prose-default mb-6 px-6 py-4 border-b border-b-gray-300"
+>
+  <div class="flex items-start gap-6">
+    <a href={getUrl(item)} class="w-1/3 rounded-sm">
+      <img
+        src={`/images/featured-image/${item.data.featuredImage || 'default.png'}`}
+        alt=""
+        class="block w-full h-auto !m-0"
+      />
+    </a>
+
+    <div class="flex flex-col items-start gap-6">
+      <h2 class="!m-0 !mt-2 lg:!text-2xl">
+        <a href={getUrl(item)} class="!no-underline !text-secondary-700">
+          {item.data.title}
+        </a>
+      </h2>
+
+      <p class="!m-0 !-mt-4 text-xs text-gray-500">
+        {new Date(item.data.pubDate).toLocaleDateString('hu-HU')}
+      </p>
+
+      <p class="!m-0">{item.data.excerpt}</p>
+
+      <a href={getUrl(item)} class="button"> Tovább </a>
+    </div>
+  </div>
+</div>

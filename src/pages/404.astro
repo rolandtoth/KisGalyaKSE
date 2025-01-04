@@ -5,15 +5,15 @@ import MainContent from '@components/MainContent.astro';
 import HeaderContent from '@components/HeaderContent.astro';
 
 const pageTitle = '404';
-const heading = 'Az oldal nem található.';
+const heading = pageTitle;
 ---
 
 <BaseLayout pageTitle={pageTitle}>
   <Header>
     <HeaderContent slot="header-content" heading={heading} />
   </Header>
-</BaseLayout>
 
-<MainContent class="prose-default">
-  <p>A keresett oldal nem található.</p>
-</MainContent>
+  <MainContent class="prose-default text-center">
+    <p>A keresett oldal nem található.</p>
+  </MainContent>
+</BaseLayout>

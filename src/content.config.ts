@@ -33,7 +33,7 @@ const events = defineCollection({
 });
 
 const biketrips = defineCollection({
-  loader: glob({ pattern: "**/*.md", base: "./src/data/kerekparturak" }),
+  loader: glob({ pattern: "**/*.md", base: "./src/data/kerekparturak-a-bukkben" }),
   schema: z.object({
     title: z.string(),
     excerpt: z.string(),
