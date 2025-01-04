@@ -15,12 +15,12 @@ const heading = '';
 
 export async function getStaticPaths(options: GetStaticPathsOptions) {
   const entries = await getCollection('news', ({ data }) => {
-    return data.draft !== true;
+    return data.draft !== true && data.includeInNews;
   });
 
   entries.sort((a, b) => (b.data.pubDate > a.data.pubDate ? 1 : -1));
 
-  return options.paginate(entries, { pageSize: 1 });
+  return options.paginate(entries, { pageSize: 3 });
 }
 
 const getUrl = (item: any) => {
@@ -43,26 +43,61 @@ const { first, prev, next, last } = page.url;
   </Header>
 
   <MainContent>
-    <ul>
-      {
-        news.map((item: any) => (
-          <li>
-            <a href={getUrl(item)} class="underline">
-              {item.data.title}
-            </a>
-          </li>
-        ))
-      }
-    </ul>
+    <div class="lg:flex lg:gap-12">
+      <div class="grow">
+        <ul>
+          {
+            news.map((item) => (
+              <li class="bg-white flex flex-col gap-4 justify-start prose-default mb-6 px-6 py-4 border-b border-b-gray-200">
+                <div class="flex items-start gap-6">
+                  <a href={getUrl(item)} class="w-1/3 rounded-sm">
+                    <img
+                      src={`/images/featured-image/${item.data.featuredImage || 'default.png'}`}
+                      alt=""
+                      class="block w-full h-auto !m-0"
+                    />
+                  </a>
 
-    <nav
-      class="my-8 flex gap-1 text-xl [&>*]:inline-block [&>*]:p-2 [&>*]:leading-tight [&>a:not[href]>svg]:fill-gray-100"
-    >
-      <a href={first}><Fragment set:html={arrowLeft} /></a>
-      <a href={prev}><Fragment set:html={chevronLeft} /></a>
-      <span class="text-[1rem]">{page.currentPage}/{page.lastPage}</span>
-      <a href={next}><Fragment set:html={chevronRight} /></a>
-      <a href={last}><Fragment set:html={arrowRight} /></a>
-    </nav>
+                  <div class="flex flex-col items-start gap-6">
+                    <h2 class="!m-0 !mt-2 lg:!text-2xl ">
+                      <a
+                        href={getUrl(item)}
+                        class="!no-underline !text-secondary-700"
+                      >
+                        {item.data.title}
+                      </a>
+                    </h2>
+
+                    <p class="!m-0 !-mt-4 text-xs text-gray-500">
+                      {new Date(item.data.pubDate).toLocaleDateString('hu-HU')}
+                    </p>
+
+                    <p class="!m-0">{item.data.excerpt}</p>
+
+                    <a href={getUrl(item)} class="button">
+                      Tovább
+                    </a>
+                  </div>
+                </div>
+              </li>
+            ))
+          }
+        </ul>
+
+        <nav
+          class="my-8 flex gap-1 text-xl [&>*]:inline-block [&>*]:p-2 [&>*]:leading-tight [&>a:not[href]>svg]:fill-gray-100"
+        >
+          <a href={first}><Fragment set:html={arrowLeft} /></a>
+          <a href={prev}><Fragment set:html={chevronLeft} /></a>
+          <span class="text-[1rem]">{page.currentPage}/{page.lastPage}</span>
+          <a href={next}><Fragment set:html={chevronRight} /></a>
+          <a href={last}><Fragment set:html={arrowRight} /></a>
+        </nav>
+      </div>
+
+      <aside class="basis-1/4 p-6 bg-gray-100 rounded-lg prose-default">
+        <h3 class="!mt-0">Támogatóink</h3>
+      </aside>
+    </div>
   </MainContent>
 </BaseLayout>

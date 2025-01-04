@@ -2,7 +2,7 @@
 const { heading, breadcrumbs } = Astro.props;
 ---
 
-<div class="py-8 lg:py-12 bg-secondary-800 text-white">
+<div class="py-12 lg:py-16 bg-secondary-800 text-white">
   <div class="container mx-auto flex flex-col gap-2">
     {
       breadcrumbs?.length > 0 && (
@@ -15,7 +15,9 @@ const { heading, breadcrumbs } = Astro.props;
         </nav>
       )
     }
-    <h1 class="text-2xl lg:text-3xl"><Fragment set:html={heading} /></h1>
+    <h1 class="text-2xl lg:text-4xl font-display">
+      <Fragment set:html={heading} />
+    </h1>
     <slot name="header-content-subtitle" />
   </div>
 </div>

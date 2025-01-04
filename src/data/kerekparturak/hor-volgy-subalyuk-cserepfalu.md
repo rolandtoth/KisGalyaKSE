@@ -4,6 +4,7 @@ tags:
   - terep
   - étterem
 sortOrder: 200
+includeInNews: true
 pubDate: 2020-06-01
 excerpt: Hór-völgy – Suba-lyuk – Cserépfalu (terep)
 ---

@@ -5,12 +5,16 @@ import HeaderContent from '@components/HeaderContent.astro';
 import MainContent from '@components/MainContent.astro';
 
 const pageTitle = 'Sífutás';
-const heading = 'Sífutás Bükkszentkereszten';
+const heading = 'Sífutás? Bükkszentkereszt!';
+const subTitle =
+  'Kis-Galya KSE által szervezett sífutási lehetőség Bükkszentkereszten';
 ---
 
 <BaseLayout pageTitle={pageTitle}>
   <Header>
-    <HeaderContent slot="header-content" heading={heading} />
+    <HeaderContent slot="header-content" heading={heading}>
+      <p slot="header-content-subtitle">{subTitle}</p>
+    </HeaderContent>
   </Header>
 
   <MainContent>

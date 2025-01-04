@@ -64,11 +64,11 @@
 }
 
 .button {
-  @apply !no-underline items-center px-4 py-2 mt-1 bg-primary-300 rounded-sm inline-flex gap-2 lg:hover:bg-primary-400 lg:hover:text-default transition-colors;
+  @apply !no-underline items-center px-4 py-2 mt-1 bg-primary-300 rounded-sm inline-flex gap-2 lg:hover:bg-primary-400 lg:hover:text-default transition-colors justify-center min-w-28;
 }
 
 .prose-default {
-  @apply prose prose-headings:text-lg prose-headings:text-secondary-700 !max-w-none;
+  @apply prose prose-headings:text-secondary-700 prose-headings:font-display prose-headings:font-normal !max-w-none;
 }
 
 a {
