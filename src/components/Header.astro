@@ -42,15 +42,22 @@ const isActive = (url: string) => {
   <div class="container mx-auto flex justify-between">
     <a
       href="/"
-      class="flex flex-col !text-white py-3 relative top-2px"
+      class="flex gap-2 !text-white py-3 relative top-2px lg:pl-20"
       aria-title={siteName}
     >
-      <span class="font-display block text-[28px] leading-none select-none"
-        >{siteName}</span
-      >
-      <span class="block text-[0.82rem] relative top-1 tracking-[0.1rem]"
-        >{siteSlogan}</span
-      >
+      <img
+        src="/images/kis-galya-beka.svg"
+        alt=""
+        class="hidden lg:inline-block absolute -left-3 top-5px w-22 h-auto"
+      />
+      <span class="flex flex-col">
+        <span class="font-display block text-[28px] leading-none select-none"
+          >{siteName}</span
+        >
+        <span class="block text-[0.82rem] relative top-1 tracking-[0.1rem]"
+          >{siteSlogan}</span
+        >
+      </span>
     </a>
     <nav class="flex gap-1">
       {
