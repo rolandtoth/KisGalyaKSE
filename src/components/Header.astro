@@ -37,12 +37,12 @@ const isActive = (url: string) => {
 ---
 
 <div
-  class="bg-secondary-600 border-b-6 border-b-secondary-900 lg:sticky top-0 z-10"
+  class="bg-secondary-600 shadow-secondary-900 shadow-[inset_0_-4px_0] lg:sticky top-0 z-10"
 >
   <div class="container mx-auto flex justify-between">
     <a
       href="/"
-      class="flex gap-2 !text-white py-3 relative top-2px lg:pl-20"
+      class="flex gap-2 !text-white py-3 relative lg:pl-20"
       aria-title={siteName}
     >
       <img
@@ -54,7 +54,7 @@ const isActive = (url: string) => {
         <span class="font-display block text-[28px] leading-none select-none"
           >{siteName}</span
         >
-        <span class="block text-[0.82rem] relative top-1 tracking-[0.1rem]"
+        <span class="block text-[0.78rem] relative top-3px tracking-widest"
           >{siteSlogan}</span
         >
       </span>
@@ -64,7 +64,7 @@ const isActive = (url: string) => {
         pages.map(({ url, title }) => (
           <a
             href={url}
-            class={`px-4 inline-flex items-center lg:min-w-22 justify-around border-y-2 border-transparent ${isActive(url) ? 'border-b-primary-300 !text-primary-300' : ' text-white lg:hover:!text-primary-300'}`}
+            class={`px-4 inline-flex items-center lg:min-w-22 justify-around border-y-4 border-transparent ${isActive(url) ? 'border-b-primary-300 !text-primary-300' : ' text-white lg:hover:!text-primary-300'}`}
           >
             {title}
           </a>

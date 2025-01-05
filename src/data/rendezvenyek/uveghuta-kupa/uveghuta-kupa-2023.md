@@ -2,7 +2,7 @@
 type: uveghuta-kupa
 title: XX. Üveghuta Kupa
 slug: uveghuta-kupa-2023
-featuredImage: uveghuta-kupa.webp
+featuredImage: logo-uveghuta-kupa.png
 excerpt: XX. Üveghuta Kupa excerpt goes here
 year: 2023
 pubDate: 2023-10-06

@@ -43,9 +43,9 @@ const { Content } = await render(entry);
 <BaseLayout pageTitle={pageTitle}>
   <Header>
     <HeaderContent slot="header-content" {...{ heading, breadcrumbs }}>
-      <p slot="header-content-subtitle">
+      <div slot="header-content-subtitle" class="mt-1">
         <TagList tags={entry.data.tags} />
-      </p>
+      </div>
     </HeaderContent>
   </Header>
 

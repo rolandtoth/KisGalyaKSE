@@ -10,6 +10,7 @@ const news = defineCollection({
   schema: z.object({
     title: z.string(),
     excerpt: z.string(),
+    featuredImage: z.string().optional(),
     pubDate: z.date(),
     draft: z.boolean().optional(),
     includeInNews: z.boolean().optional(),
@@ -21,7 +22,7 @@ const events = defineCollection({
   schema: z.object({
     type: EventCategory,
     title: z.string(),
-    featuredImage: z.string(),
+    featuredImage: z.string().optional(),
     excerpt: z.string(),
     year: z.number(),
     pubDate: z.date(),
@@ -37,6 +38,7 @@ const biketrips = defineCollection({
   schema: z.object({
     title: z.string(),
     excerpt: z.string(),
+    featuredImage: z.string().optional(),
     tags: z.string().array(),
     pubDate: z.date(),
     sortOrder: z.number(),

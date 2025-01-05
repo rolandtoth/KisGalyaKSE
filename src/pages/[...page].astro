@@ -23,7 +23,7 @@ export async function getStaticPaths(options: GetStaticPathsOptions) {
 
   entries.sort((a, b) => (b.data.pubDate > a.data.pubDate ? 1 : -1));
 
-  return options.paginate(entries, { pageSize: 3 });
+  return options.paginate(entries, { pageSize: 8 });
 }
 
 const { page } = Astro.props;
@@ -47,7 +47,8 @@ const { first, prev, next, last } = page.url;
           >
             <a href={first}><Fragment set:html={arrowLeft} /></a>
             <a href={prev}><Fragment set:html={chevronLeft} /></a>
-            <span class="text-[1rem]">{page.currentPage}/{page.lastPage}</span>
+            <span class="text-[1rem]">{page.currentPage} / {page.lastPage}</span
+            >
             <a href={next}><Fragment set:html={chevronRight} /></a>
             <a href={last}><Fragment set:html={arrowRight} /></a>
           </nav>

@@ -64,11 +64,15 @@
 }
 
 .button {
-  @apply !no-underline items-center px-4 py-2 mt-1 bg-primary-300 rounded-sm inline-flex gap-2 lg:hover:bg-primary-400 lg:hover:text-default transition-colors justify-center min-w-28;
+  @apply !no-underline items-center px-4 py-1 bg-primary-300 rounded-sm inline-flex gap-2 lg:hover:border-primary-600 lg:hover:text-default transition-colors justify-center border-2 border-primary-700;
 }
 
 .prose-default {
   @apply prose prose-headings:text-secondary-700 prose-headings:font-display prose-headings:font-normal !max-w-none prose-img:rounded-sm prose-img:my-5;
+
+  > :first-child {
+    @apply mt-0;
+  }
 }
 
 a {
