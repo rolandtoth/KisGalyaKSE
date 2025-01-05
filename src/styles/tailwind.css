@@ -68,7 +68,7 @@
 }
 
 .prose-default {
-  @apply prose prose-headings:text-secondary-700 prose-headings:font-display prose-headings:font-normal !max-w-none;
+  @apply prose prose-headings:text-secondary-700 prose-headings:font-display prose-headings:font-normal !max-w-none prose-img:rounded-sm;
 }
 
 a {

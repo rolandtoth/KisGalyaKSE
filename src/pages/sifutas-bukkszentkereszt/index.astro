@@ -3,11 +3,15 @@ import BaseLayout from '@layouts/BaseLayout.astro';
 import Header from '@components/Header.astro';
 import HeaderContent from '@components/HeaderContent.astro';
 import MainContent from '@components/MainContent.astro';
+import { Image } from 'astro:assets';
+import sifutasImage from '@assets/images/sifutas/sifutas.jpg';
+import aSifutasrolImage from '@assets/images/sifutas/a-sifutasrol.jpg';
+import sifutasProspektusImage from '@assets/images/sifutas/sifutas-prospektus.jpg';
 
 const pageTitle = 'Sífutás';
 const heading = 'Sífutás? Bükkszentkereszt!';
 const subTitle =
-  'Kis-Galya KSE által szervezett sífutási lehetőség Bükkszentkereszten';
+  'Sífutási lehetőség Bükkszentkereszten, a Kis-Galya KSE szervezésében';
 ---
 
 <BaseLayout pageTitle={pageTitle}>
@@ -18,61 +22,53 @@ const subTitle =
   </Header>
 
   <MainContent>
-    <div class="prose-default">
-      <p>
-        <img
-          class="alignnone size-full wp-image-1993"
-          title=""
-          src="http://kisgalya.hu/wp-content/uploads/2013/02/sifutas.jpg"
-          alt=""
-          width="550"
-          height="358"
-          srcset="https://kisgalya.hu/wp-content/uploads/2013/02/sifutas.jpg 550w, https://kisgalya.hu/wp-content/uploads/2013/02/sifutas-360x234.jpg 360w, https://kisgalya.hu/wp-content/uploads/2013/02/sifutas-540x351.jpg 540w, https://kisgalya.hu/wp-content/uploads/2013/02/sifutas-120x78.jpg 120w, https://kisgalya.hu/wp-content/uploads/2013/02/sifutas-150x97.jpg 150w"
-          sizes="(max-width: 550px) 100vw, 550px"
+    <div class="lg:flex lg:gap-12">
+      <div class="prose-default">
+        <Image
+          src={sifutasImage}
+          alt="Kis-Galya KSE sífutás"
+          class="!mt-0 lg:w-full"
         />
-      </p>
-      <p>
-        Egyesületünk a téli szezonokban sífutási lehetőséget biztosít az
-        érdeklődő fiatalok, iskolai csoportok részére Bükkszentkereszten.
-      </p>
-      <p>Oktatást és felszerelést igény szerint biztosítunk.</p>
-      <p>
-        A programról egyeztetni Sikter Zsuzsánál lehet, a <strong
-          >30 206-3602</strong
-        >-es telefonszámon.
-      </p>
-      <h2 style="text-align: center;">Töltse le prospektusainkat!</h2>
-      <div style="text-align: center; margin-bottom: 20px;">
-        <a
-          href="/wp-content/themes/kisgalya/docs/kisgalya-sifutas-prospektus.pdf"
-        >
-          &nbsp;
-        </a><a
-          href="/wp-content/themes/kisgalya/docs/kisgalya-sifutas-prospektus.pdf"
-          target="_blank"
-          ><img
-            class="aligncenter wp-image-2048 size-full"
-            src="http://kisgalya.hu/wp-content/uploads/2013/01/kisgalya-sifutas-prospektus-2013.jpg"
-            alt="Sífutás prospektus"
-            width="185"
-            height="200"
-            srcset="https://kisgalya.hu/wp-content/uploads/2013/01/kisgalya-sifutas-prospektus-2013.jpg 185w, https://kisgalya.hu/wp-content/uploads/2013/01/kisgalya-sifutas-prospektus-2013-120x129.jpg 120w, https://kisgalya.hu/wp-content/uploads/2013/01/kisgalya-sifutas-prospektus-2013-150x162.jpg 150w"
-            sizes="(max-width: 185px) 100vw, 185px"
-          /><br />
-        </a><a
-          href="/wp-content/uploads/2015/03/a-sifutasrol-2015-03-26.pdf"
-          target="_blank"
-          ><img
-            class="aligncenter wp-image-2408 size-full"
-            src="http://kisgalya.hu/wp-content/uploads/2015/03/a-sifutasrol-2015-03-26.jpg"
-            alt=""
-            width="281"
-            height="197"
-            srcset="https://kisgalya.hu/wp-content/uploads/2015/03/a-sifutasrol-2015-03-26.jpg 281w, https://kisgalya.hu/wp-content/uploads/2015/03/a-sifutasrol-2015-03-26-120x84.jpg 120w, https://kisgalya.hu/wp-content/uploads/2015/03/a-sifutasrol-2015-03-26-150x105.jpg 150w"
-            sizes="(max-width: 281px) 100vw, 281px"
-          /></a
-        >
+        <p>
+          Egyesületünk a téli szezonokban sífutási lehetőséget biztosít az
+          érdeklődő fiatalok, iskolai csoportok részére Bükkszentkereszten.
+        </p>
+        <p>Oktatást és felszerelést igény szerint biztosítunk.</p>
+        <p>
+          A programról egyeztetni Sikter Zsuzsánál lehet, a <strong
+            >30 206-3602</strong
+          >-es telefonszámon.
+        </p>
       </div>
+
+      <aside
+        class="basis-1/3 p-6 bg-gray-100 rounded-lg prose-default lg:text-center"
+      >
+        <h3 class="!mt-0">Tekintse meg prospektusainkat!</h3>
+
+        <div class="flex lg:flex-col gap-8">
+          <a
+            href="/docs/sifutas/kisgalya-sifutas-prospektus.pdf"
+            target="_blank"
+          >
+            <Image
+              src={sifutasProspektusImage}
+              alt="Sífutás prospektus"
+              class="!m-0 lg:w-full"
+            />
+
+            <p class="!mb-0">Sífutás? Bükkszentkereszt!</p>
+          </a>
+          <a href="/docs/sifutas/a-sifutasrol.pdf" target="_blank">
+            <Image
+              src={aSifutasrolImage}
+              alt="A sífutásról"
+              class="!m-0 lg:w-full"
+            />
+            <p class="!mb-0">A sífutásról</p>
+          </a>
+        </div>
+      </aside>
     </div>
   </MainContent>
 </BaseLayout>
