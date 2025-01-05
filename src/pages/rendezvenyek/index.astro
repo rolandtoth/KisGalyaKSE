@@ -9,7 +9,11 @@ import ContentLayout from '@components/ContentLayout.astro';
 import Sponsors from '@components/Sponsors.astro';
 
 const pageTitle = 'Rendezvények';
-const events = await getCollection('events');
+const events = await getCollection('events', ({ data }) => {
+  return data.draft !== true;
+});
+
+events.sort((a, b) => (b.data.pubDate > a.data.pubDate ? 1 : -1));
 ---
 
 <BaseLayout pageTitle={pageTitle}>

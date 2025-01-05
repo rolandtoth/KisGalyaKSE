@@ -5,6 +5,8 @@ import { siteNameFull } from 'src/constants';
 import HeaderContent from '@components/HeaderContent.astro';
 import documentText from '@assets/icons/document-text.svg?raw';
 import MainContent from '@components/MainContent.astro';
+import { Image } from 'astro:assets';
+import taxOnePercentImage from '@assets/images/kapcsolat/kisgalya-kse-egy-szazalek.jpg';
 
 const pageTitle = 'Kapcsolat';
 ---
@@ -67,10 +69,10 @@ const pageTitle = 'Kapcsolat';
 
         <p>Adószám: 18441732105</p>
 
-        <img
-          src="/images/kisgalya-kse-egy-szazalek.jpg"
+        <Image
+          src={taxOnePercentImage}
           alt="Kis-Galya KSE 1 százalék"
-          class="not-prose block"
+          class="block"
         />
 
         <p>

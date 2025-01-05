@@ -68,7 +68,7 @@
 }
 
 .prose-default {
-  @apply prose prose-headings:text-secondary-700 prose-headings:font-display prose-headings:font-normal !max-w-none prose-img:rounded-sm;
+  @apply prose prose-headings:text-secondary-700 prose-headings:font-display prose-headings:font-normal !max-w-none prose-img:rounded-sm prose-img:my-5;
 }
 
 a {

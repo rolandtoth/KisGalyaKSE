@@ -22,7 +22,9 @@ const title = pageTitle ? `${pageTitle} - ${siteName}` : siteNameFull;
     <meta name="generator" content={Astro.generator} />
   </head>
   <body class="text-default flex flex-col min-h-screen">
-    <main class="flex-grow">
+    <main
+      class="flex-grow relative bg-white z-1 pb-8 lg:pb-12 border-b border-b-gray-200"
+    >
       <slot />
     </main>
     <Footer />
