@@ -15,12 +15,12 @@ const { heading, breadcrumbs } = Astro.props;
         </nav>
       )
     }
-    <h1 class="text-2xl lg:text-3xl font-bold">
+    <h1 class="text-2xl lg:text-4xl font-bold">
       <Fragment set:html={heading} />
     </h1>
     {
       Astro.slots.has('header-content-subtitle') && (
-        <div class="text-lg">
+        <div class="lg:text-lg">
           <slot name="header-content-subtitle" />
         </div>
       )

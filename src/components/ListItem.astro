@@ -2,11 +2,6 @@
 import { Image } from 'astro:assets';
 import type { ImageMetadata } from 'astro';
 
-// interface Props {
-//   featuredImage: string;
-//   item: any;
-// }
-
 const featuredImageDefault = '/src/assets/images/featured-image/default.svg';
 const { item } = Astro.props;
 
@@ -22,8 +17,10 @@ const featuredImageFn =
 const getUrl = (item: any) => {
   let segments = item.filePath
     .replace('src/data/', '')
+    .replace('index.md', '')
     .replace('.md', '')
-    .split('/');
+    .split('/')
+    .filter((x: string) => x);
 
   return [segments[0], segments[segments.length - 1]].join('/');
 };

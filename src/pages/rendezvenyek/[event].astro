@@ -1,7 +1,7 @@
 ---
 import BaseLayout from '@layouts/BaseLayout.astro';
 import Header from '@components/Header.astro';
-import { getCollection, getEntry, render } from 'astro:content';
+import { getCollection, getEntries, getEntry, render } from 'astro:content';
 import HeaderContent from '@components/HeaderContent.astro';
 import MainContent from '@components/MainContent.astro';
 
@@ -23,22 +23,71 @@ if (!entry) {
 }
 
 const pageTitle = entry.data.title;
+const heading = pageTitle;
+
+const breadcrumbs = [
+  {
+    url: '/rendezvenyek',
+    title: 'Rendezvények',
+  },
+];
 
 const { Content } = await render(entry);
-const competitionAnnouncement = entry.data.eventMeta?.find(
-  ({ key }) => key === 'Versenykiírás'
-)?.value;
+
+// const competitionAnnouncement = entry.data.eventMeta?.find(
+//   ({ key }) => key === 'Versenykiírás'
+// )?.value;
+
+const relatedPosts = entry.data.relatedPosts
+  ? await getEntries(entry.data.relatedPosts)
+  : null;
+
+// console.log(relatedPosts);
+
+const versenykiiras = relatedPosts?.[0] ?? null;
+// const versenykiiras = relatedPosts?.[0]
+//   ? {
+//       title: relatedPosts[0].data.title,
+//       // body: (await render(relatedPosts[0])).Content,
+//     }
+//   : null;
 ---
 
 <BaseLayout pageTitle={pageTitle}>
   <Header>
-    <HeaderContent slot="header-content" heading={entry.data.title} />
+    <HeaderContent slot="header-content" {...{ heading, breadcrumbs }} />
   </Header>
 
   <MainContent>
-    <Content />
+    <div class="prose-default">
+      <Content />
 
-    {
+      {
+        versenykiiras && (
+          <div>
+            <h2>{versenykiiras.data.title}</h2>
+            {/* <div><versenykiiras.body></div> */}
+
+            <a
+              href="https://drive.google.com/uc?export=download&id=14GG5NgtKd9cSohDSkmlwv9CNtpBTw54s"
+              class="button"
+            >
+              Download
+            </a>
+
+            <div class="flex justify-center bg-gray-100 my-8">
+              <iframe
+                class="w-[870px] border-4 border-secondary-700 rounded-md bg-white my-8 aspect-[1/1.414]"
+                src={versenykiiras.data.contentUrl}
+              >
+                Loading…
+              </iframe>
+            </div>
+          </div>
+        )
+      }
+
+      <!-- {
       competitionAnnouncement && (
         <div>
           <h2>Versenykiírás</h2>
@@ -66,9 +115,9 @@ const competitionAnnouncement = entry.data.eventMeta?.find(
           </ul>
         </div>
       )
-    }
+    } -->
 
-    {
+      <!-- {
       entry.data.links?.length && (
         <div>
           <h2>Event Meta</h2>
@@ -81,6 +130,7 @@ const competitionAnnouncement = entry.data.eventMeta?.find(
           </ul>
         </div>
       )
-    }
+    } -->
+    </div>
   </MainContent>
 </BaseLayout>

@@ -1,4 +1,4 @@
-import { defineCollection, z } from 'astro:content';
+import { defineCollection, reference, z } from 'astro:content';
 import { glob } from 'astro/loaders';
 
 const INTERNAL_LINK_REGEX = new RegExp(/^\/(?!\/)[^?\n]+(.)*$/);
@@ -6,19 +6,19 @@ const EventCategory = z.enum(["uveghuta-kupa"]);
 const EventMetaKey = z.enum(["Limitált indulási létszám", "Versenykiírás"]);
 
 const news = defineCollection({
-  loader: glob({ pattern: "**/*.md", base: "./src/data" }),
+  loader: glob({ pattern: "**/[^_]*.md", base: "./src/data" }),
   schema: z.object({
     title: z.string(),
     excerpt: z.string(),
-    featuredImage: z.string().optional(),
     pubDate: z.date(),
+    featuredImage: z.string().optional(),
     draft: z.boolean().optional(),
     includeInNews: z.boolean().optional(),
   }),
 });
 
 const events = defineCollection({
-  loader: glob({ pattern: "**/*.md", base: "./src/data/rendezvenyek" }),
+  loader: glob({ pattern: "**/index.md", base: "./src/data/rendezvenyek" }),
   schema: z.object({
     type: EventCategory,
     title: z.string(),
@@ -30,20 +30,35 @@ const events = defineCollection({
     includeInNews: z.boolean().optional(),
     eventMeta: z.object({ key: EventMetaKey, value: z.string().or(z.number()) }).array().optional(),
     links: z.object({ name: z.string(), url: z.string().url().or(z.string().regex(INTERNAL_LINK_REGEX)) }).array().optional(),
+    relatedPosts: z.array(reference('relatedPosts')).default([]),
+  }),
+});
+
+const relatedPosts = defineCollection({
+  loader: glob({ pattern: "**/+(!(index)).md", base: "./src/data/rendezvenyek" }),
+  schema: z.object({
+    title: z.string(),
+    excerpt: z.string(),
+    pubDate: z.date(),
+    contentUrl: z.string().url(),
+    parent: reference('events'),
+    featuredImage: z.string().optional(),
+    draft: z.boolean().optional(),
+    includeInNews: z.boolean().optional(),
   }),
 });
 
 const biketrips = defineCollection({
-  loader: glob({ pattern: "**/*.md", base: "./src/data/kerekparturak-a-bukkben" }),
+  loader: glob({ pattern: "**/[^_]*.md", base: "./src/data/kerekparturak-a-bukkben" }),
   schema: z.object({
     title: z.string(),
     excerpt: z.string(),
+    pubDate: z.date(),
     featuredImage: z.string().optional(),
     tags: z.string().array(),
-    pubDate: z.date(),
     sortOrder: z.number(),
     draft: z.boolean().optional(),
   }),
 });
 
-export const collections = { biketrips, events, news };
+export const collections = { biketrips, events, news, relatedPosts };
