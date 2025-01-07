@@ -7,6 +7,7 @@ import { Image } from 'astro:assets';
 import sifutasImage from '@assets/images/sifutas/sifutas.jpg';
 import aSifutasrolImage from '@assets/images/sifutas/a-sifutasrol.jpg';
 import sifutasProspektusImage from '@assets/images/sifutas/sifutas-prospektus.jpg';
+import ContentLayout from '@components/ContentLayout.astro';
 
 const pageTitle = 'Sífutás';
 const heading = 'Sífutás? Bükkszentkereszt!';
@@ -22,18 +23,19 @@ const subTitle =
   </Header>
 
   <MainContent>
-    <div class="lg:flex lg:gap-12">
-      <div class="prose-default">
-        <Image
-          src={sifutasImage}
-          alt="Kis-Galya KSE sífutás"
-          class="!mt-0 lg:w-full"
-        />
+    <ContentLayout>
+      <div class="prose-default" slot="main">
         <p>
           Egyesületünk a téli szezonokban sífutási lehetőséget biztosít az
           érdeklődő fiatalok, iskolai csoportok részére Bükkszentkereszten.
         </p>
         <p>Oktatást és felszerelést igény szerint biztosítunk.</p>
+
+        <Image
+          src={sifutasImage}
+          alt="Kis-Galya KSE sífutás"
+          class="lg:w-full"
+        />
         <p>
           A programról egyeztetni Sikter Zsuzsánál lehet, a <strong
             >30 206-3602</strong
@@ -42,11 +44,12 @@ const subTitle =
       </div>
 
       <aside
-        class="basis-1/3 p-6 bg-gray-100 rounded-lg prose-default lg:text-center"
+        slot="sidebar"
+        class="bg-gray-100 p-6 lg:px-8 rounded-lg prose-default lg:text-center"
       >
         <h3 class="!mt-0">Tekintse meg prospektusainkat!</h3>
 
-        <div class="flex lg:flex-col gap-8">
+        <div class="flex lg:flex-col gap-8 !mt-4">
           <a
             href="/docs/sifutas/kisgalya-sifutas-prospektus.pdf"
             target="_blank"
@@ -69,6 +72,6 @@ const subTitle =
           </a>
         </div>
       </aside>
-    </div>
+    </ContentLayout>
   </MainContent>
 </BaseLayout>

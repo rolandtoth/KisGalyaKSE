@@ -1,7 +1,37 @@
 ---
-
+const sponsors = [
+  {
+    url: 'https://bringasport.hu/',
+    title: 'Bringasport',
+    imageSrc: '/images/sponsors/bringasport.png',
+  },
+  {
+    url: 'http://www.bukkszentkereszt.hu/',
+    title: 'Bükkszentkereszt',
+    imageSrc: '/images/sponsors/bukkszentkereszt.png',
+  },
+];
 ---
 
-<aside class="basis-1/4 p-6 bg-gray-100 rounded-lg prose-default text-center">
+<aside class="p-6 lg:px-8 bg-gray-100 rounded-lg prose-default text-center">
   <h3 class="!mt-0">Támogatóink</h3>
+
+  <div class="flex lg:flex-col gap-6 items-center justify-center w-full !mt-8">
+    {
+      sponsors.map(({ url, title, imageSrc }) => (
+        <a
+          href={url}
+          target="_blank"
+          rel="noopener"
+          class="block w-full max-w-36 mb-2"
+        >
+          <img
+            src={imageSrc}
+            alt={title}
+            class="not-prose w-full h-auto block !m-0"
+          />
+        </a>
+      ))
+    }
+  </div>
 </aside>
