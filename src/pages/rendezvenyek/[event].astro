@@ -4,6 +4,8 @@ import Header from '@components/Header.astro';
 import { getCollection, getEntries, getEntry, render } from 'astro:content';
 import HeaderContent from '@components/HeaderContent.astro';
 import MainContent from '@components/MainContent.astro';
+import magnifyingGlassPlusIcon from '@assets/icons/magnifying-glass-plus.svg?raw';
+import closeIcon from '@assets/icons/close.svg?raw';
 
 const { event: entryId } = Astro.params;
 
@@ -68,21 +70,30 @@ const versenykiiras = relatedPosts?.[0] ?? null;
             <h2>{versenykiiras.data.title}</h2>
             {/* <div><versenykiiras.body></div> */}
 
+            <div class="fullview-toggle-wrapper mb-4">
+              <input
+                type="checkbox"
+                id="fullview-toggle"
+                class="fullview-toggle hidden"
+                autocapitalize="nope"
+              />
+              <label for="fullview-toggle" class="fullview-toggle-label">
+                <span>
+                  <Fragment set:html={magnifyingGlassPlusIcon} />
+                </span>
+                <span>
+                  <Fragment set:html={closeIcon} />
+                </span>
+              </label>
+              <iframe src={versenykiiras.data.contentUrl}>Loading…</iframe>
+            </div>
+
             <a
-              href="https://drive.google.com/uc?export=download&id=14GG5NgtKd9cSohDSkmlwv9CNtpBTw54s"
+              href="https://drive.google.com/uc?export=download&id=1_UMVyv6WfG5ohiSekyTauDAyFoB281r6"
               class="button"
             >
               Download
             </a>
-
-            <div class="flex justify-center bg-gray-100 my-8">
-              <iframe
-                class="w-[870px] border-4 border-secondary-700 rounded-md bg-white my-8 aspect-[1/1.414]"
-                src={versenykiiras.data.contentUrl}
-              >
-                Loading…
-              </iframe>
-            </div>
           </div>
         )
       }
