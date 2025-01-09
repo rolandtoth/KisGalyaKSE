@@ -4,6 +4,7 @@ import { glob } from 'astro/loaders';
 const INTERNAL_LINK_REGEX = new RegExp(/^\/(?!\/)[^?\n]+(.)*$/);
 const EventCategory = z.enum(["uveghuta-kupa"]);
 const EventMetaKey = z.enum(["Limitált indulási létszám", "Versenykiírás"]);
+const EventRelatedPostType = z.enum(["elevation-map", "competition-announcement", "results", "photos"]);
 
 const news = defineCollection({
   loader: glob({ pattern: "**/[^_]*.md", base: "./src/data" }),
@@ -37,11 +38,21 @@ const events = defineCollection({
 const relatedPosts = defineCollection({
   loader: glob({ pattern: "**/+(!(index)).md", base: "./src/data/rendezvenyek" }),
   schema: z.object({
+    type: EventRelatedPostType,
     title: z.string(),
     excerpt: z.string(),
     pubDate: z.date(),
-    contentUrl: z.string().url(),
-    parent: reference('events'),
+    content: z.object({
+      url: z.string().url().optional(),
+      embedUrl: z.string().url().optional(),
+      downloadUrl: z.string().url().optional(),
+      image: z.string().optional(),
+      photos: z.array(z.object({
+        title: z.string(),
+        url: z.string().url(),
+      })).optional(),
+    }),
+    // parent: reference('events'),
     featuredImage: z.string().optional(),
     draft: z.boolean().optional(),
     includeInNews: z.boolean().optional(),

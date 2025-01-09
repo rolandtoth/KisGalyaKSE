@@ -6,7 +6,7 @@ const { heading, breadcrumbs } = Astro.props;
   <div class="container mx-auto flex flex-col gap-2">
     {
       breadcrumbs?.length > 0 && (
-        <nav class="flex gap-2">
+        <nav class="flex gap-2 mb-2">
           {breadcrumbs.map(({ url, title }) => (
             <a href={url} class="text-white hover:text-primary-400">
               {title}
@@ -15,7 +15,7 @@ const { heading, breadcrumbs } = Astro.props;
         </nav>
       )
     }
-    <h1 class="text-2xl lg:text-4xl font-bold">
+    <h1 class="text-2xl lg:text-4xl font-bold text-primary-200">
       <Fragment set:html={heading} />
     </h1>
     {

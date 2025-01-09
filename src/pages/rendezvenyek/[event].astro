@@ -46,18 +46,23 @@ const relatedPosts = entry.data.relatedPosts
 
 // console.log(relatedPosts);
 
-const versenykiiras = relatedPosts?.[0] ?? null;
-// const versenykiiras = relatedPosts?.[0]
-//   ? {
-//       title: relatedPosts[0].data.title,
-//       // body: (await render(relatedPosts[0])).Content,
-//     }
-//   : null;
+const { announcement, elevationMap, results, photos } = {
+  announcement: relatedPosts?.find(
+    (x) => x.data?.type === 'competition-announcement'
+  ),
+  elevationMap: relatedPosts?.find((x) => x.data?.type === 'elevation-map'),
+  results: relatedPosts?.find((x) => x.data?.type === 'results'),
+  photos: relatedPosts?.find((x) => x.data?.type === 'photos'),
+};
 ---
 
 <BaseLayout pageTitle={pageTitle}>
   <Header>
-    <HeaderContent slot="header-content" {...{ heading, breadcrumbs }} />
+    <HeaderContent slot="header-content" {...{ heading, breadcrumbs }}>
+      <div slot="header-content-subtitle" class="mt-1">
+        <p>{entry.data.excerpt}</p>
+      </div>
+    </HeaderContent>
   </Header>
 
   <MainContent>
@@ -65,10 +70,20 @@ const versenykiiras = relatedPosts?.[0] ?? null;
       <Content />
 
       {
-        versenykiiras && (
+        announcement && (
           <div>
-            <h2>{versenykiiras.data.title}</h2>
-            {/* <div><versenykiiras.body></div> */}
+            <div class="flex gap-8 items-center justify-between mb-6">
+              <h2 class="!m-0">{announcement.data.title}</h2>
+              {announcement.data.content.downloadUrl && (
+                <a
+                  href={announcement.data.content.downloadUrl}
+                  class="button"
+                  download
+                >
+                  Letöltés
+                </a>
+              )}
+            </div>
 
             <div class="fullview-toggle-wrapper mb-4">
               <input
@@ -85,35 +100,49 @@ const versenykiiras = relatedPosts?.[0] ?? null;
                   <Fragment set:html={closeIcon} />
                 </span>
               </label>
-              <iframe src={versenykiiras.data.contentUrl}>Loading…</iframe>
+              <iframe src={announcement.data.content.embedUrl} />
             </div>
+          </div>
+        )
+      }
 
-            <a
-              href="https://drive.google.com/uc?export=download&id=1_UMVyv6WfG5ohiSekyTauDAyFoB281r6"
-              class="button"
-            >
-              Download
+      {
+        elevationMap && (
+          <div>
+            <h2>{elevationMap.data.title}</h2>
+
+            <img src={elevationMap.data.content.image} alt="" />
+          </div>
+        )
+      }
+
+      {
+        results && (
+          <div>
+            <h2>{results.data.title}</h2>
+
+            <a href={results.data.content.url} target="blank" class="button">
+              Eredmények megtekintése
             </a>
           </div>
         )
       }
 
+      {
+        photos?.data?.content?.photos && (
+          <div>
+            <h2>{photos.data.title}</h2>
+
+            {photos.data.content.photos.map((photo) => (
+              <a href={photo.url} target="blank" class="button">
+                {photo.title}
+              </a>
+            ))}
+          </div>
+        )
+      }
+
       <!-- {
-      competitionAnnouncement && (
-        <div>
-          <h2>Versenykiírás</h2>
-
-          <iframe
-            class="w-[870px] border-none bg-white my-8 aspect-[1/1.414]"
-            src={competitionAnnouncement as string}
-          >
-            Loading…
-          </iframe>
-        </div>
-      )
-    }
-
-    {
       entry.data.eventMeta?.length && (
         <div>
           <h2>Event Meta</h2>
