@@ -25,5 +25,13 @@ const { heading, breadcrumbs } = Astro.props;
         </div>
       )
     }
+
+    {
+      Astro.slots.has('header-content-bottom-tabs') && (
+        <div class="lg:-mb-16 mt-12 z-1 relative before:block before:absolute before:w-screen before:h-full before:z-[-1] before:ml-[calc(-50vw_+_50%)] before:bg-secondary-900">
+          <slot name="header-content-bottom-tabs" />
+        </div>
+      )
+    }
   </div>
 </div>

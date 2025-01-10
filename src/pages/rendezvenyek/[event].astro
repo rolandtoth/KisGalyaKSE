@@ -6,6 +6,7 @@ import HeaderContent from '@components/HeaderContent.astro';
 import MainContent from '@components/MainContent.astro';
 import magnifyingGlassPlusIcon from '@assets/icons/magnifying-glass-plus.svg?raw';
 import closeIcon from '@assets/icons/close.svg?raw';
+import { EventRelatedPostTypes } from 'src/content.config';
 
 const { event: entryId } = Astro.params;
 
@@ -46,14 +47,38 @@ const relatedPosts = entry.data.relatedPosts
 
 // console.log(relatedPosts);
 
-const { announcement, elevationMap, results, photos } = {
-  announcement: relatedPosts?.find(
-    (x) => x.data?.type === 'competition-announcement'
-  ),
-  elevationMap: relatedPosts?.find((x) => x.data?.type === 'elevation-map'),
-  results: relatedPosts?.find((x) => x.data?.type === 'results'),
-  photos: relatedPosts?.find((x) => x.data?.type === 'photos'),
+const getItemByType = (type: string) =>
+  relatedPosts?.find((x) => x.data?.type === type);
+
+const relatedItems = {
+  announcement: getItemByType('versenykiiras'),
+  results: getItemByType('eredmenyek'),
+  galleries: getItemByType('galeria'),
+  elevationMap: getItemByType('szintrajz'),
 };
+
+const { announcement, elevationMap, results, galleries } = relatedItems;
+
+const postTypeNames = EventRelatedPostTypes as {
+  [key: string]: string;
+};
+
+const tabItems = Object.entries(relatedItems)
+  .map(([_, value]) => {
+    const type = value?.data?.type;
+
+    if (!type) {
+      return null;
+    }
+
+    return {
+      title: postTypeNames[type],
+      id: type,
+    };
+  })
+  .filter((x) => x?.id);
+
+// console.log(tabItems);
 ---
 
 <BaseLayout pageTitle={pageTitle}>
@@ -62,18 +87,47 @@ const { announcement, elevationMap, results, photos } = {
       <div slot="header-content-subtitle" class="mt-1">
         <p>{entry.data.excerpt}</p>
       </div>
+
+      <div slot="header-content-bottom-tabs">
+        <nav
+          class="inline-flex gap-1px text-secondary-700 border-t-10 border-b-4 border-white rounded-t-xs"
+        >
+          {
+            tabItems.map(({ title, id }) => (
+              <a href={`#${id}`} class="bg-white p-2 px-6 leading-tight">
+                {title}
+              </a>
+            ))
+          }
+        </nav>
+      </div>
     </HeaderContent>
   </Header>
 
   <MainContent>
+    <!-- <div class="-mt-14 overflow-hidden">
+      <nav class="flex gap-1px">
+        {
+          tabItems.map(({ title, id }) => (
+            <a
+              href={`#${id}`}
+              class="bg-white p-4 px-6 rounded-md leading-tight"
+            >
+              {title}
+            </a>
+          ))
+        }
+      </nav>
+    </div> -->
+
     <div class="prose-default">
       <Content />
 
       {
         announcement && (
-          <div>
+          <div id={announcement.data.type}>
             <div class="flex gap-8 items-center justify-between mb-6">
-              <h2 class="!m-0">{announcement.data.title}</h2>
+              <h2 class="!m-0">{postTypeNames[announcement.data.type]}</h2>
               {announcement.data.content.downloadUrl && (
                 <a
                   href={announcement.data.content.downloadUrl}
@@ -108,8 +162,8 @@ const { announcement, elevationMap, results, photos } = {
 
       {
         elevationMap && (
-          <div>
-            <h2>{elevationMap.data.title}</h2>
+          <div id={elevationMap.data.type}>
+            <h2>{postTypeNames[elevationMap.data.type]}</h2>
 
             <img src={elevationMap.data.content.image} alt="" />
           </div>
@@ -118,24 +172,24 @@ const { announcement, elevationMap, results, photos } = {
 
       {
         results && (
-          <div>
-            <h2>{results.data.title}</h2>
+          <div id={results.data.type}>
+            <h2>{postTypeNames[results.data.type]}</h2>
 
             <a href={results.data.content.url} target="blank" class="button">
-              Eredmények megtekintése
+              {results.data.title}
             </a>
           </div>
         )
       }
 
       {
-        photos?.data?.content?.photos && (
-          <div>
-            <h2>{photos.data.title}</h2>
+        galleries?.data?.content?.gallery && (
+          <div id={galleries.data.type}>
+            <h2>{postTypeNames[galleries.data.type]}</h2>
 
-            {photos.data.content.photos.map((photo) => (
-              <a href={photo.url} target="blank" class="button">
-                {photo.title}
+            {galleries.data.content.gallery.map((x) => (
+              <a href={x.url} target="blank" class="button">
+                {x.title}
               </a>
             ))}
           </div>

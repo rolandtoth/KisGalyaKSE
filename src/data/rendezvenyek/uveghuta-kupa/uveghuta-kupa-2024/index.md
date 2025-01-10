@@ -9,7 +9,7 @@ pubDate: 2024-10-06
 includeInNews: true
 relatedPosts:
   - uveghuta-kupa-2024-versenykiiras
+  - uveghuta-kupa-2024-eredmenyek
   - uveghuta-kupa-2024-szintrajz
-  - uveghuta-kupa-2024-eredmenylista
-  - uveghuta-kupa-2024-fotok
+  - uveghuta-kupa-2024-galeria
 ---

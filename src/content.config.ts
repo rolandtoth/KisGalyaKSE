@@ -1,10 +1,19 @@
 import { defineCollection, reference, z } from 'astro:content';
 import { glob } from 'astro/loaders';
 
+const zodEnum = <T>(arr: T[]): [T, ...T[]] => arr as [T, ...T[]];
+
+export const EventRelatedPostTypes = {
+  szintrajz: "Szintrajz",
+  versenykiiras: "Versenykiírás",
+  eredmenyek: "Eredmények",
+  galeria: "Galéria",
+} as const;
+
 const INTERNAL_LINK_REGEX = new RegExp(/^\/(?!\/)[^?\n]+(.)*$/);
 const EventCategory = z.enum(["uveghuta-kupa"]);
 const EventMetaKey = z.enum(["Limitált indulási létszám", "Versenykiírás"]);
-const EventRelatedPostType = z.enum(["elevation-map", "competition-announcement", "results", "photos"]);
+const EventRelatedPostType = z.enum(zodEnum(Object.keys(EventRelatedPostTypes)));
 
 const news = defineCollection({
   loader: glob({ pattern: "**/[^_]*.md", base: "./src/data" }),
@@ -15,6 +24,7 @@ const news = defineCollection({
     featuredImage: z.string().optional(),
     draft: z.boolean().optional(),
     includeInNews: z.boolean().optional(),
+    type: z.string().optional(),
   }),
 });
 
@@ -40,6 +50,7 @@ const relatedPosts = defineCollection({
   schema: z.object({
     type: EventRelatedPostType,
     title: z.string(),
+    slug: z.string(),
     excerpt: z.string(),
     pubDate: z.date(),
     content: z.object({
@@ -47,12 +58,12 @@ const relatedPosts = defineCollection({
       embedUrl: z.string().url().optional(),
       downloadUrl: z.string().url().optional(),
       image: z.string().optional(),
-      photos: z.array(z.object({
+      gallery: z.array(z.object({
         title: z.string(),
         url: z.string().url(),
       })).optional(),
     }),
-    // parent: reference('events'),
+    parent: reference('events'),
     featuredImage: z.string().optional(),
     draft: z.boolean().optional(),
     includeInNews: z.boolean().optional(),
