@@ -11,6 +11,7 @@ export const EventRelatedPostTypes = {
 } as const;
 
 const INTERNAL_LINK_REGEX = new RegExp(/^\/(?!\/)[^?\n]+(.)*$/);
+const Activity = z.enum(["bike", "run", "hike", "ski", "other"]);
 const EventCategory = z.enum(["uveghuta-kupa"]);
 const EventMetaKey = z.enum(["Limitált indulási létszám", "Versenykiírás"]);
 const EventRelatedPostType = z.enum(zodEnum(Object.keys(EventRelatedPostTypes)));
@@ -32,6 +33,7 @@ const events = defineCollection({
   loader: glob({ pattern: "**/index.md", base: "./src/data/rendezvenyek" }),
   schema: z.object({
     type: EventCategory,
+    activity: Activity,
     title: z.string(),
     featuredImage: z.string().optional(),
     excerpt: z.string(),

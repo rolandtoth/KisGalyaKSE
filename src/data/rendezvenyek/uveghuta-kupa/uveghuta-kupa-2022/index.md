@@ -1,5 +1,6 @@
 ---
 type: uveghuta-kupa
+activity: bike
 title: XIX. Üveghuta Kupa
 slug: uveghuta-kupa-2022
 featuredImage: logo-uveghuta-kupa.png

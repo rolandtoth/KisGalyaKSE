@@ -1,5 +1,6 @@
 ---
 type: uveghuta-kupa
+activity: bike
 title: XXI. Üveghuta Kupa 2024
 slug: uveghuta-kupa-2024
 featuredImage: logo-uveghuta-kupa.png

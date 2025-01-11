@@ -1,5 +1,6 @@
 ---
 type: uveghuta-kupa
+activity: bike
 title: XX. Üveghuta Kupa
 slug: uveghuta-kupa-2023
 featuredImage: logo-uveghuta-kupa.png

@@ -1,37 +1,53 @@
 ---
-const { heading, breadcrumbs } = Astro.props;
+const { breadcrumbs, headerImage, heading } = Astro.props;
 ---
 
-<div class="py-12 lg:py-16 bg-secondary-800 text-white">
-  <div class="container mx-auto flex flex-col gap-2">
-    {
-      breadcrumbs?.length > 0 && (
-        <nav class="flex gap-2 mb-2">
-          {breadcrumbs.map(({ url, title }) => (
-            <a href={url} class="text-white hover:text-primary-400">
-              {title}
-            </a>
-          ))}
-        </nav>
-      )
-    }
-    <h1 class="text-2xl lg:text-4xl font-bold text-primary-200">
-      <Fragment set:html={heading} />
-    </h1>
-    {
-      Astro.slots.has('header-content-subtitle') && (
-        <div class="lg:text-lg">
-          <slot name="header-content-subtitle" />
-        </div>
-      )
-    }
+<div class="bg-secondary-800 text-white">
+  <div class="container mx-auto flex flex-col lg:flex-row gap-8">
+    <div class="flex flex-col gap-2 basis-1/2 py-12 lg:py-16">
+      <div class="justify-center">
+        {
+          breadcrumbs?.length > 0 && (
+            <nav class="flex gap-2 mb-2">
+              {breadcrumbs.map(({ url, title }) => (
+                <a href={url} class="text-white hover:text-primary-400">
+                  {title}
+                </a>
+              ))}
+            </nav>
+          )
+        }
+        <h1 class="text-2xl lg:text-4xl font-bold text-primary-200">
+          <Fragment set:html={heading} />
+        </h1>
+        {
+          Astro.slots.has('header-content-subtitle') && (
+            <div class="lg:text-lg">
+              <slot name="header-content-subtitle" />
+            </div>
+          )
+        }
 
-    {
-      Astro.slots.has('header-content-bottom-tabs') && (
-        <div class="lg:-mb-16 mt-12 z-1 relative before:block before:absolute before:w-screen before:h-full before:z-[-1] before:ml-[calc(-50vw_+_50%)] before:bg-secondary-900">
-          <slot name="header-content-bottom-tabs" />
-        </div>
-      )
-    }
+        {
+          Astro.slots.has('header-content-bottom-tabs') && (
+            <div class="lg:-mb-16 mt-12 z-1 relative before:block before:absolute before:w-screen before:h-full before:z-[-1] before:ml-[calc(-50vw_+_50%)] before:bg-secondary-900">
+              <slot name="header-content-bottom-tabs" />
+            </div>
+          )
+        }
+      </div>
+    </div>
+
+    <div class="header-image-wrap flex justify-center basis-1/2">
+      {
+        headerImage && (
+          <img
+            src={headerImage}
+            alt=""
+            class="-mt-8 -mb-28 self-center max-w-[420px]"
+          />
+        )
+      }
+    </div>
   </div>
 </div>

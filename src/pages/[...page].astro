@@ -5,13 +5,13 @@ import type { GetStaticPathsOptions } from 'astro';
 import BaseLayout from '@layouts/BaseLayout.astro';
 import HeaderContent from '@components/HeaderContent.astro';
 import MainContent from '@components/MainContent.astro';
-import arrowLeft from '@assets/icons/arrow-left.svg?raw';
-import chevronLeft from '@assets/icons/chevron-left.svg?raw';
-import chevronRight from '@assets/icons/chevron-right.svg?raw';
-import arrowRight from '@assets/icons/arrow-right.svg?raw';
 import ListItem from '@components/ListItem.astro';
 import Sponsors from '@components/Sponsors.astro';
 import ContentLayout from '@components/ContentLayout.astro';
+import arrowLeftIcon from '@assets/icons/arrow-left.svg?raw';
+import chevronLeftIcon from '@assets/icons/chevron-left.svg?raw';
+import chevronRightIcon from '@assets/icons/chevron-right.svg?raw';
+import arrowRightIcon from '@assets/icons/arrow-right.svg?raw';
 
 const pageTitle = '';
 const heading = '';
@@ -45,12 +45,12 @@ const { first, prev, next, last } = page.url;
           <nav
             class="my-8 flex gap-1 text-xl [&>*]:inline-block [&>*]:p-2 [&>*]:leading-tight [&>a:not[href]>svg]:fill-gray-100"
           >
-            <a href={first}><Fragment set:html={arrowLeft} /></a>
-            <a href={prev}><Fragment set:html={chevronLeft} /></a>
+            <a href={first}><Fragment set:html={arrowLeftIcon} /></a>
+            <a href={prev}><Fragment set:html={chevronLeftIcon} /></a>
             <span class="text-[1rem]">{page.currentPage} / {page.lastPage}</span
             >
-            <a href={next}><Fragment set:html={chevronRight} /></a>
-            <a href={last}><Fragment set:html={arrowRight} /></a>
+            <a href={next}><Fragment set:html={chevronRightIcon} /></a>
+            <a href={last}><Fragment set:html={arrowRightIcon} /></a>
           </nav>
         </div>
       </div>

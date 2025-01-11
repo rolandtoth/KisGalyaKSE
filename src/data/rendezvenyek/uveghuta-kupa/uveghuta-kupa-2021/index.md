@@ -1,5 +1,6 @@
 ---
 type: uveghuta-kupa
+activity: bike
 title: XVIII. Üveghuta Kupa
 slug: uveghuta-kupa-2021
 featuredImage: logo-uveghuta-kupa.png
