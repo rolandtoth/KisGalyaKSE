@@ -6,8 +6,6 @@ import { EventRelatedPostTypes } from 'src/content.config';
 const featuredImageDefault = '/src/assets/images/featured-image/default.svg';
 const { item } = Astro.props;
 
-// console.log(item);
-
 const featuredImages = import.meta.glob<{ default: ImageMetadata }>(
   '/src/assets/images/featured-image/*.{jpg,png,svg,webp}'
 );
@@ -31,12 +29,19 @@ const getUrl = (item: any): typeof item | string => {
 
   let segments = filePath
     .replace('src/data/', '')
+    .replace('children', '')
     .replace('index.md', '')
     .replace('.md', '')
     .split('/')
     .filter((x: string) => x);
 
-  return [segments[0], segments[segments.length - 1]].join('/');
+  if (segments[segments.length - 1].includes('#')) {
+    return [segments[0], segments[2], segments[segments.length - 1]]
+      .join('/')
+      .replace('/#', '#');
+  }
+
+  return [segments[0], segments[1], segments[2]].join('/');
 };
 ---
 

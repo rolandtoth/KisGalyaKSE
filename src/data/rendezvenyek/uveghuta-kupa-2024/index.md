@@ -2,7 +2,6 @@
 type: uveghuta-kupa
 activity: bike
 title: XXI. Üveghuta Kupa 2024
-slug: uveghuta-kupa-2024
 featuredImage: logo-uveghuta-kupa.png
 excerpt: Idén már 21. alkalommal kerül megrendezésre az Üveghuta Kupa
 year: 2024

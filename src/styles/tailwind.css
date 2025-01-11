@@ -141,10 +141,11 @@ a {
     content: '';
     position: absolute;
     top: 0;
-    bottom: 0;
+    bottom: -0.5px;
     width: 75vw;
     z-index: -1;
     transform: skewX(-59.5deg);
+    will-change: transform;
     pointer-events: none;
   }
 

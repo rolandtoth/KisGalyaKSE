@@ -1,0 +1,256 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import Header from '@components/Header.astro';
+import { getCollection, getEntries, getEntry, render } from 'astro:content';
+import HeaderContent from '@components/HeaderContent.astro';
+import MainContent from '@components/MainContent.astro';
+import { EventRelatedPostTypes } from 'src/content.config';
+import magnifyingGlassPlusIcon from '@assets/icons/magnifying-glass-plus.svg?raw';
+import closeIcon from '@assets/icons/close.svg?raw';
+import arrowDownTrayIcon from '@assets/icons/arrow-down-tray.svg?raw';
+import flagIcon from '@assets/icons/flag.svg?raw';
+import arrowTrendingUpIcon from '@assets/icons/arrow-trending-up.svg?raw';
+import photoIcon from '@assets/icons/photo.svg?raw';
+import arrowTopRightOnSquareIcon from '@assets/icons/arrow-top-right-on-square.svg?raw';
+
+export async function getStaticPaths() {
+  const events = await getCollection('events');
+  const eventInfos = await getCollection('eventInfo');
+
+  return [...events, ...eventInfos].map((entry) => ({
+    params: { entry: entry.id },
+    props: { item: entry },
+  }));
+}
+
+const { item } = Astro.props;
+
+if (!item) {
+  return Astro.redirect('/404');
+}
+
+const isMainEvent = item.collection === 'events';
+
+const pageTitle = item.data.title;
+const heading = pageTitle;
+const headerImage = isMainEvent
+  ? `/images/activity/${item.data.activity}.png`
+  : null;
+
+const breadcrumbs = [
+  {
+    url: '/rendezvenyek',
+    title: 'Rendezvények',
+  },
+];
+
+const { Content } = await render(item);
+
+const relatedPosts =
+  isMainEvent && item.data.relatedPosts
+    ? await getEntries(item.data.relatedPosts)
+    : null;
+
+const getItemByType = (type: string) =>
+  relatedPosts?.find((x) => x.data?.type === type);
+
+const { announcement, elevationMap, results, galleries } =
+  (isMainEvent && {
+    announcement: getItemByType('versenykiiras'),
+    results: getItemByType('eredmenyek'),
+    galleries: getItemByType('galeria'),
+    elevationMap: getItemByType('szintrajz'),
+  }) ||
+  {};
+
+const postTypeNames = EventRelatedPostTypes as {
+  [key: string]: string;
+};
+---
+
+<BaseLayout pageTitle={pageTitle}>
+  <Header>
+    <HeaderContent
+      slot="header-content"
+      {...{ heading, breadcrumbs, headerImage }}
+    >
+      <div slot="header-content-subtitle" class="mt-1">
+        <p>{item.data.excerpt}</p>
+      </div>
+    </HeaderContent>
+  </Header>
+
+  <MainContent>
+    <div class="prose-default">
+      <Content />
+
+      {
+        isMainEvent && (
+          <Fragment>
+            {announcement && (
+              <div id={announcement.data.type}>
+                <div class="flex gap-4 items-center mb-6">
+                  <h2 class="!m-0">{postTypeNames[announcement.data.type]}</h2>
+                  {announcement.data.content.downloadUrl && (
+                    <a
+                      href={announcement.data.content.downloadUrl}
+                      download
+                      class="relative top-1px [&>svg]:size-5"
+                    >
+                      <Fragment set:html={arrowDownTrayIcon} />
+                    </a>
+                  )}
+                </div>
+
+                <div class="fullview-toggle-wrapper mb-4">
+                  <button
+                    popovertarget="announcement"
+                    class="dialog-control dialog-open"
+                  >
+                    <Fragment set:html={magnifyingGlassPlusIcon} />
+                  </button>
+
+                  <iframe
+                    src={announcement.data.content.embedUrl}
+                    loading="lazy"
+                  />
+
+                  <dialog id="announcement" popover class="bg-secondary-900/70">
+                    <div class="w-screen h-screen flex items-center justify-center">
+                      <div class="dialog-content">
+                        <button
+                          popovertarget="announcement"
+                          class="dialog-control dialog-close"
+                        >
+                          <Fragment set:html={closeIcon} />
+                        </button>
+
+                        <iframe
+                          src={announcement.data.content.embedUrl}
+                          loading="lazy"
+                          class="!w-[1200px] !h-[80vh]"
+                        />
+                      </div>
+                    </div>
+                  </dialog>
+                </div>
+              </div>
+            )}
+
+            <div class="flex flex-col lg:flex-row [&>*]:basis-1/3 [&>*]:min-w-0 [&>*]:bg-white [&>*]:text-center mt-12 gap-8">
+              {elevationMap && (
+                <div id={elevationMap.data.type}>
+                  <div class="flex flex-col gap-6 items-center min-w-0">
+                    <span class="event-icon">
+                      <Fragment set:html={arrowTrendingUpIcon} />
+                    </span>
+
+                    <h2 class="!m-0">
+                      {postTypeNames[elevationMap.data.type]}
+                    </h2>
+
+                    <div class="w-full">
+                      <div class="dialog-content">
+                        <button
+                          popovertarget="dialogElevationMap"
+                          class="dialog-control dialog-open"
+                        >
+                          <Fragment set:html={magnifyingGlassPlusIcon} />
+                        </button>
+                        <img
+                          src={elevationMap.data.content.image}
+                          alt=""
+                          class="!my-0 mx-auto"
+                        />
+                      </div>
+
+                      <dialog
+                        id="dialogElevationMap"
+                        popover
+                        class="bg-secondary-900/70"
+                      >
+                        <div class="w-screen h-screen flex items-center justify-center">
+                          <span class="relative">
+                            <button
+                              popovertarget="dialogElevationMap"
+                              class="dialog-control dialog-close"
+                            >
+                              <Fragment set:html={closeIcon} />
+                            </button>
+                            <img
+                              src={elevationMap.data.content.image}
+                              alt=""
+                              class="!m-0"
+                            />
+                          </span>
+                        </div>
+                      </dialog>
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              {results && (
+                <div id={results.data.type}>
+                  <div class="flex flex-col gap-6 items-center min-w-0">
+                    <span class="event-icon">
+                      <Fragment set:html={flagIcon} />
+                    </span>
+
+                    <h2 class="!m-0">{postTypeNames[results.data.type]}</h2>
+
+                    <div class="w-full">
+                      <a
+                        href={results.data.content.url}
+                        target="blank"
+                        class="button"
+                      >
+                        {results.data.title}
+                        <small class="[&>svg]:size-4 relative -top-1.5 -mr-2.5 -left-1">
+                          <Fragment set:html={arrowTopRightOnSquareIcon} />
+                        </small>
+                      </a>
+
+                      <p class="text-sm truncate text-gray-400 relative -top-1">
+                        Forrás: {results.data.content.url}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              {galleries?.data?.content?.gallery && (
+                <div id={galleries.data.type}>
+                  <div class="flex flex-col gap-6 items-center min-w-0">
+                    <span class="event-icon">
+                      <Fragment set:html={photoIcon} />
+                    </span>
+
+                    <h2 class="!m-0">{postTypeNames[galleries.data.type]}</h2>
+
+                    <div class="w-full">
+                      {galleries.data.content.gallery.map((x) => (
+                        <div class="mb-4">
+                          <a href={x.url} target="blank" class="button">
+                            {x.title}
+                            <small class="[&>svg]:size-4 relative -top-1.5 -mr-2.5 -left-1">
+                              <Fragment set:html={arrowTopRightOnSquareIcon} />
+                            </small>
+                          </a>
+
+                          <p class="text-sm truncate text-gray-400 relative -top-1">
+                            Forrás: {x.url}
+                          </p>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              )}
+            </div>
+          </Fragment>
+        )
+      }
+    </div>
+  </MainContent>
+</BaseLayout>

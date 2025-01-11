@@ -47,8 +47,20 @@ const events = defineCollection({
   }),
 });
 
+const eventInfo = defineCollection({
+  loader: glob({ pattern: "*/(!(index)).md", base: "./src/data/rendezvenyek" }),
+  schema: z.object({
+    title: z.string(),
+    featuredImage: z.string().optional(),
+    excerpt: z.string(),
+    pubDate: z.date(),
+    draft: z.boolean().optional(),
+    includeInNews: z.boolean().optional(),
+  }),
+});
+
 const relatedPosts = defineCollection({
-  loader: glob({ pattern: "**/+(!(index)).md", base: "./src/data/rendezvenyek" }),
+  loader: glob({ pattern: "**/children/*.md", base: "./src/data/rendezvenyek" }),
   schema: z.object({
     type: EventRelatedPostType,
     title: z.string(),
@@ -85,4 +97,4 @@ const biketrips = defineCollection({
   }),
 });
 
-export const collections = { biketrips, events, news, relatedPosts };
+export const collections = { biketrips, events, eventInfo, news, relatedPosts };
