@@ -9,6 +9,11 @@ import { Image } from 'astro:assets';
 import taxOnePercentImage from '@assets/images/kapcsolat/kisgalya-kse-egy-szazalek.jpg';
 
 const pageTitle = 'Kapcsolat';
+
+const docs = {
+  taxOnePercent:
+    'https://drive.google.com/file/d/1k2GBE7MwOmvpCkbsD4ykTisdeUiActIr/view?usp=drive_link',
+};
 ---
 
 <BaseLayout pageTitle={pageTitle}>
@@ -81,7 +86,7 @@ const pageTitle = 'Kapcsolat';
         </p>
 
         <p class="-mt-2">
-          <a href="/docs/19KOZ.pdf" target="_blank" class="button">
+          <a href={docs.taxOnePercent} target="_blank" class="button">
             <Fragment set:html={documentText} />
             <span class="relative top-1px">PDF megtekintése</span>
           </a>

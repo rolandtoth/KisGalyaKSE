@@ -13,6 +13,13 @@ const pageTitle = 'Sífutás';
 const heading = 'Sífutás? Bükkszentkereszt!';
 const subTitle =
   'Sífutási lehetőség Bükkszentkereszten, a Kis-Galya KSE szervezésében';
+
+const docs = {
+  crossCountrySkiingAbout:
+    'https://drive.google.com/file/d/1iUxU81vjcax_H052f_tLTzJwHjAJ280L/view?usp=drive_link',
+  crossCountrySkiingBrochure:
+    'https://drive.google.com/file/d/1IU8GHvyABQaTxJ6nm5VFaVKDtaCK4Nwq/view?usp=drive_link',
+};
 ---
 
 <BaseLayout pageTitle={pageTitle}>
@@ -50,10 +57,7 @@ const subTitle =
         <h3 class="!mt-0">Tekintse meg prospektusainkat!</h3>
 
         <div class="flex lg:flex-col gap-8 !mt-4">
-          <a
-            href="/docs/sifutas/kisgalya-sifutas-prospektus.pdf"
-            target="_blank"
-          >
+          <a href={docs.crossCountrySkiingBrochure} target="_blank">
             <Image
               src={sifutasProspektusImage}
               alt="Sífutás prospektus"
@@ -62,7 +66,7 @@ const subTitle =
 
             <p class="!mb-0">Sífutás? Bükkszentkereszt!</p>
           </a>
-          <a href="/docs/sifutas/a-sifutasrol.pdf" target="_blank">
+          <a href={docs.crossCountrySkiingAbout} target="_blank">
             <Image
               src={aSifutasrolImage}
               alt="A sífutásról"
