@@ -5,4 +5,4 @@ pubDate: 2024-09-12
 includeInNews: true
 ---
 
-Lorem ipsum content goes here.
+Lorem ipsum content goes here

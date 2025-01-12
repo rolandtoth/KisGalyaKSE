@@ -17,7 +17,7 @@ const EventMetaKey = z.enum(["Limitált indulási létszám", "Versenykiírás"]
 const EventRelatedPostType = z.enum(zodEnum(Object.keys(EventRelatedPostTypes)));
 
 const news = defineCollection({
-  loader: glob({ pattern: "**/[^_]*.md", base: "./src/data" }),
+  loader: glob({ pattern: "*/**/(!(children))/[^_]*.md", base: "./src/data" }),
   schema: z.object({
     title: z.string(),
     excerpt: z.string(),
@@ -48,7 +48,7 @@ const events = defineCollection({
 });
 
 const eventInfo = defineCollection({
-  loader: glob({ pattern: "*/(!(index)).md", base: "./src/data/rendezvenyek" }),
+  loader: glob({ pattern: "**/(!(index)).md", base: "./src/data/rendezvenyek" }),
   schema: z.object({
     title: z.string(),
     featuredImage: z.string().optional(),
@@ -77,7 +77,7 @@ const relatedPosts = defineCollection({
         url: z.string().url(),
       })).optional(),
     }),
-    parent: reference('events'),
+    parent: reference('events').optional(),
     featuredImage: z.string().optional(),
     draft: z.boolean().optional(),
     includeInNews: z.boolean().optional(),
